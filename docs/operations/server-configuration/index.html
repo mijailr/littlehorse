@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-operations/server-configuration" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.3.2">
+<title data-rh="true">Server Configurations | LittleHorse</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://littlehorse.dev/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://littlehorse.dev/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://littlehorse.dev/docs/operations/server-configuration"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Server Configurations | LittleHorse"><meta data-rh="true" name="description" content="This page contains all of the configurations that are accepted by the LittleHorse Server. We recommend that you set these configurations as environment variables for the ghcr.io/littlehorse-enterprises/littlehorse/lh-server image."><meta data-rh="true" property="og:description" content="This page contains all of the configurations that are accepted by the LittleHorse Server. We recommend that you set these configurations as environment variables for the ghcr.io/littlehorse-enterprises/littlehorse/lh-server image."><link data-rh="true" rel="icon" href="/img/logo.jpg"><link data-rh="true" rel="canonical" href="https://littlehorse.dev/docs/operations/server-configuration"><link data-rh="true" rel="alternate" href="https://littlehorse.dev/docs/operations/server-configuration" hreflang="en"><link data-rh="true" rel="alternate" href="https://littlehorse.dev/docs/operations/server-configuration" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="LittleHorse RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="LittleHorse Atom Feed"><link rel="stylesheet" href="/assets/css/styles.dee63f6b.css">
+<script src="/assets/js/runtime~main.9fbaef6c.js" defer="defer"></script>
+<script src="/assets/js/main.7f05f728.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.jpg" alt="LittleHorse Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.jpg" alt="LittleHorse Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">LittleHorse</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/overview">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a href="https://littlehorse.io" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Product Site<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://docs.google.com/forms/d/e/1FAIpQLScXVvTYy4LQnYoFoRKRQ7ppuxe0KgncsDukvm96qKN0pU5TnQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Contact Us<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://github.com/littlehorse-enterprises/littlehorse" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a href="https://launchpass.com/littlehorsecommunity" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/overview">LittleHorse Overview</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/architecture-and-guarantees">Architecture and Guarantees</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/concepts/">Concepts</a><button aria-label="Expand sidebar category &#x27;Concepts&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/developer-guide/">Developer Guide</a><button aria-label="Expand sidebar category &#x27;Developer Guide&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/docs/operations/">Operations</a><button aria-label="Collapse sidebar category &#x27;Operations&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/operations/overview">Operations Overview</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/operations/server-configuration">Server Configurations</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/operations/dashboard-configuration">Dashboard Configurations</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/operations/client-configuration">Workers/Clients Configurations</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/platform/">LH Platform</a><button aria-label="Expand sidebar category &#x27;LH Platform&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/api">LittleHorse API Reference</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/operations/"><span itemprop="name">Operations</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Server Configurations</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><h1>Server Configurations</h1>
+<p>This page contains all of the configurations that are accepted by the LittleHorse Server. We recommend that you set these configurations as environment variables for the <code>ghcr.io/littlehorse-enterprises/littlehorse/lh-server</code> image.</p>
+<p>However, some power users might want to fork and build from source (the code is on <a href="https://github.com/littlehorse-enterprises/littlehorse" target="_blank" rel="noopener noreferrer">our github</a>). If you do this, you can set these configurations in the <code>Properties</code> object that you pass into the <code>LHServerConfig</code> constructor.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="kafka">Kafka<a href="#kafka" class="hash-link" aria-label="Direct link to Kafka" title="Direct link to Kafka">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_bootstrap_servers"><code>LHS_KAFKA_BOOTSTRAP_SERVERS</code><a href="#lhs_kafka_bootstrap_servers" class="hash-link" aria-label="Direct link to lhs_kafka_bootstrap_servers" title="Direct link to lhs_kafka_bootstrap_servers">​</a></h3>
+<p>A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. <a href="https://kafka.apache.org/documentation/#streamsconfigs_bootstrap.servers" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> string list</li>
+<li><strong>Default:</strong> localhost:9092</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_keystore"><code>LHS_KAFKA_KEYSTORE</code><a href="#lhs_kafka_keystore" class="hash-link" aria-label="Direct link to lhs_kafka_keystore" title="Direct link to lhs_kafka_keystore">​</a></h3>
+<p>The location of the key store file. This is optional for client and can be used for two-way authentication for client. <a href="https://kafka.apache.org/documentation/#brokerconfigs_ssl.keystore.location" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_keystore_password"><code>LHS_KAFKA_KEYSTORE_PASSWORD</code><a href="#lhs_kafka_keystore_password" class="hash-link" aria-label="Direct link to lhs_kafka_keystore_password" title="Direct link to lhs_kafka_keystore_password">​</a></h3>
+<p>The store password for the key store file. This is optional. <a href="https://kafka.apache.org/documentation/#brokerconfigs_ssl.keystore.password" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_keystore_password_file"><code>LHS_KAFKA_KEYSTORE_PASSWORD_FILE</code><a href="#lhs_kafka_keystore_password_file" class="hash-link" aria-label="Direct link to lhs_kafka_keystore_password_file" title="Direct link to lhs_kafka_keystore_password_file">​</a></h3>
+<p>The store password for the key store file. If it is different to null it overrides the <code>LHS_KAFKA_KEYSTORE_PASSWORD</code> config
+and load the password from the file. This is optional.
+<a href="https://kafka.apache.org/documentation/#brokerconfigs_ssl.keystore.password" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_truststore"><code>LHS_KAFKA_TRUSTSTORE</code><a href="#lhs_kafka_truststore" class="hash-link" aria-label="Direct link to lhs_kafka_truststore" title="Direct link to lhs_kafka_truststore">​</a></h3>
+<p>The location of the trust store file. This is optional. <a href="https://kafka.apache.org/documentation/#brokerconfigs_ssl.truststore.location" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_truststore_password"><code>LHS_KAFKA_TRUSTSTORE_PASSWORD</code><a href="#lhs_kafka_truststore_password" class="hash-link" aria-label="Direct link to lhs_kafka_truststore_password" title="Direct link to lhs_kafka_truststore_password">​</a></h3>
+<p>The password for the trust store file. This is optional. <a href="https://kafka.apache.org/documentation/#brokerconfigs_ssl.truststore.password" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_truststore_password_file"><code>LHS_KAFKA_TRUSTSTORE_PASSWORD_FILE</code><a href="#lhs_kafka_truststore_password_file" class="hash-link" aria-label="Direct link to lhs_kafka_truststore_password_file" title="Direct link to lhs_kafka_truststore_password_file">​</a></h3>
+<p>The password for the trust store file. If it is different to null it overrides the <code>LHS_KAFKA_TRUSTSTORE_PASSWORD</code> config
+and load the password from the file. This is optional. <a href="https://kafka.apache.org/documentation/#brokerconfigs_ssl.truststore.password" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_security_protocol"><code>LHS_KAFKA_SECURITY_PROTOCOL</code><a href="#lhs_kafka_security_protocol" class="hash-link" aria-label="Direct link to lhs_kafka_security_protocol" title="Direct link to lhs_kafka_security_protocol">​</a></h3>
+<p>The protocol with which to talk to the Kafka brokers. Defaults to <code>PLAINTEXT</code>. <a href="https://kafka.apache.org/documentation/#brokerconfigs_security.protcol" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> <code>PLAINTEXT</code>|<code>SSL</code>|<code>SASL_SSL</code></li>
+<li><strong>Default:</strong> <code>PLAINTEXT</code></li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_sasl_mechanism"><code>LHS_KAFKA_SASL_MECHANISM</code><a href="#lhs_kafka_sasl_mechanism" class="hash-link" aria-label="Direct link to lhs_kafka_sasl_mechanism" title="Direct link to lhs_kafka_sasl_mechanism">​</a></h3>
+<p>The mechanism used for SASL connections to the Kafka brokers. Only valid if <code>LHS_KAFKA_SECURITY_PROTOCOL</code> is set to <code>SASL_SSL</code>. <a href="https://kafka.apache.org/documentation/#producerconfigs_sasl.mechanism" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> <code>PLAINTEXT</code>|<code>SSL</code>|<code>SASL_SSL</code></li>
+<li><strong>Default:</strong> <code>PLAINTEXT</code></li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_sasl_jaas_config"><code>LHS_KAFKA_SASL_JAAS_CONFIG</code><a href="#lhs_kafka_sasl_jaas_config" class="hash-link" aria-label="Direct link to lhs_kafka_sasl_jaas_config" title="Direct link to lhs_kafka_sasl_jaas_config">​</a></h3>
+<p>The Jaas Config to be used to connect to the Kafka brokers. Only valid if the <code>LHS_KAFKA_SECURITY_PROTOCOL</code> is set to <code>SASL_SSL</code>. <a href="https://kafka.apache.org/documentation/#producerconfigs_sasl.jaas.config" target="_blank" rel="noopener noreferrer">Kafka Official</a></p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_kafka_sasl_jaas_config_file"><code>LHS_KAFKA_SASL_JAAS_CONFIG_FILE</code><a href="#lhs_kafka_sasl_jaas_config_file" class="hash-link" aria-label="Direct link to lhs_kafka_sasl_jaas_config_file" title="Direct link to lhs_kafka_sasl_jaas_config_file">​</a></h3>
+<p>A file containing the Jaas Config to be used to connect to the Kafka brokers. Only valid if the <code>LHS_KAFKA_SECURITY_PROTOCOL</code> is set to <code>SASL_SSL</code>. <a href="https://kafka.apache.org/documentation/#producerconfigs_sasl.jaas.config" target="_blank" rel="noopener noreferrer">Kafka Official</a></p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="server-internal-connections">Server Internal Connections<a href="#server-internal-connections" class="hash-link" aria-label="Direct link to Server Internal Connections" title="Direct link to Server Internal Connections">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_internal_bind_port"><code>LHS_INTERNAL_BIND_PORT</code><a href="#lhs_internal_bind_port" class="hash-link" aria-label="Direct link to lhs_internal_bind_port" title="Direct link to lhs_internal_bind_port">​</a></h3>
+<p>Listening port for internal gRPC communications. It is use by the server instances to shared distributed data through
+interactive queries. Should be unique.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 2011</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_internal_advertised_host"><code>LHS_INTERNAL_ADVERTISED_HOST</code><a href="#lhs_internal_advertised_host" class="hash-link" aria-label="Direct link to lhs_internal_advertised_host" title="Direct link to lhs_internal_advertised_host">​</a></h3>
+<p>Ensures all server instances over the network can successfully connect to each other. It represents the
+hostname that other server instances should us to connect to this server.</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> localhost</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_internal_advertised_port"><code>LHS_INTERNAL_ADVERTISED_PORT</code><a href="#lhs_internal_advertised_port" class="hash-link" aria-label="Direct link to lhs_internal_advertised_port" title="Direct link to lhs_internal_advertised_port">​</a></h3>
+<p>Listening advertise port for internal communications. It represents the
+TPC port that other server instances should us to connect to this server.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> <code>${LHS_INTERNAL_BIND_PORT}</code></li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_internal_server_cert"><code>LHS_INTERNAL_SERVER_CERT</code><a href="#lhs_internal_server_cert" class="hash-link" aria-label="Direct link to lhs_internal_server_cert" title="Direct link to lhs_internal_server_cert">​</a></h3>
+<p>Optional location of Server Cert file for TLS/mTLS connection.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_internal_server_key"><code>LHS_INTERNAL_SERVER_KEY</code><a href="#lhs_internal_server_key" class="hash-link" aria-label="Direct link to lhs_internal_server_key" title="Direct link to lhs_internal_server_key">​</a></h3>
+<p>Optional location of Server Key file for TLS/mTLS connection.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_internal_ca_cert"><code>LHS_INTERNAL_CA_CERT</code><a href="#lhs_internal_ca_cert" class="hash-link" aria-label="Direct link to lhs_internal_ca_cert" title="Direct link to lhs_internal_ca_cert">​</a></h3>
+<p>Optional location of CA Cert file that issued the client side certificates, used by mTLS connection.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="server-external-connections">Server External Connections<a href="#server-external-connections" class="hash-link" aria-label="Direct link to Server External Connections" title="Direct link to Server External Connections">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_listeners"><code>LHS_LISTENERS</code><a href="#lhs_listeners" class="hash-link" aria-label="Direct link to lhs_listeners" title="Direct link to lhs_listeners">​</a></h3>
+<p>List of comma-separated named ports the gRPC API will listen on.</p>
+<p>Format: <code>&lt;NAME&gt;:&lt;TPC PORT&gt;</code></p>
+<p>Examples of legal listener lists: <code>MY_FIRST_LISTENER:2023,MY_SECOND_LISTENER:2024</code></p>
+<ul>
+<li><strong>Type:</strong> map</li>
+<li><strong>Default:</strong> PLAIN:2023</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_listeners_protocol_map"><code>LHS_LISTENERS_PROTOCOL_MAP</code><a href="#lhs_listeners_protocol_map" class="hash-link" aria-label="Direct link to lhs_listeners_protocol_map" title="Direct link to lhs_listeners_protocol_map">​</a></h3>
+<p>Map between listener names and security protocols. Depends on <code>LHS_LISTENERS</code>.</p>
+<p>Format: <code>&lt;LISTENER NAME&gt;:&lt;PROTOCOL&gt;</code></p>
+<p>Examples of a legal list: <code>INSECURE:PLAIN,SECURE:TLS</code></p>
+<p>Allowed protocols: <code>PLAIN</code>, <code>TLS</code>, <code>MTLS</code></p>
+<ul>
+<li><strong>Type:</strong> map</li>
+<li><strong>Default:</strong> PLAIN<!-- -->:PLAIN</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_listener_listener-name_cert"><code>LHS_LISTENER_&lt;LISTENER NAME&gt;_CERT</code><a href="#lhs_listener_listener-name_cert" class="hash-link" aria-label="Direct link to lhs_listener_listener-name_cert" title="Direct link to lhs_listener_listener-name_cert">​</a></h3>
+<p>Optional location of Server Cert file for TLS/mTLS connection. Depends on <code>LHS_LISTENERS</code>.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_PROTOCOL_MAP=MY_LISTENER:MTLS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENER_MY_LISTENER_CERT=/tmp/certificate</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_listener_listener-name_key"><code>LHS_LISTENER_&lt;LISTENER NAME&gt;_KEY</code><a href="#lhs_listener_listener-name_key" class="hash-link" aria-label="Direct link to lhs_listener_listener-name_key" title="Direct link to lhs_listener_listener-name_key">​</a></h3>
+<p>Optional location of Server Key file for TLS/mTLS connection. Depends on <code>LHS_LISTENERS</code>.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_PROTOCOL_MAP=MY_LISTENER:MTLS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENER_MY_LISTENER_CERT=/tmp/certificate</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENER_MY_LISTENER_KEY=/tmp/key</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_ca_cert"><code>LHS_CA_CERT</code><a href="#lhs_ca_cert" class="hash-link" aria-label="Direct link to lhs_ca_cert" title="Direct link to lhs_ca_cert">​</a></h3>
+<p>Optional location of CA Cert file that issued the client side certificates, used by mTLS connections. Refers to the
+Certificate Authority to trust to sign certs for the clients. This CA Cert is applied to all the listeners.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_PROTOCOL_MAP=MY_LISTENER:MTLS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENER_MY_LISTENER_CERT=/tmp/certificate</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENER_MY_LISTENER_KEY=/tmp/key</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_CA_CERT=/tmp/ca</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_listeners_authentication_map"><code>LHS_LISTENERS_AUTHENTICATION_MAP</code><a href="#lhs_listeners_authentication_map" class="hash-link" aria-label="Direct link to lhs_listeners_authentication_map" title="Direct link to lhs_listeners_authentication_map">​</a></h3>
+<p>Map between listener names and authentication mechanisms. Depends on <code>LHS_LISTENERS</code>.</p>
+<blockquote>
+<p><code>LHS_LISTENERS_PROTOCOL_MAP</code> should be set to <code>MTLS</code> for a listener in order to use <code>MTLS</code> as the authentication mechanism.</p>
+</blockquote>
+<p>Format: <code>&lt;LISTENER NAME&gt;:&lt;AUTH PROTOCOL&gt;</code></p>
+<p>Examples of a legal list: <code>SECURE:OAUTH,INSECURE:NONE</code></p>
+<p>Allowed protocols: <code>NONE</code>, <code>OAUTH</code>, <code>MTLS</code></p>
+<ul>
+<li><strong>Type:</strong> map</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_oauth_introspect_url"><code>LHS_OAUTH_INTROSPECT_URL</code><a href="#lhs_oauth_introspect_url" class="hash-link" aria-label="Direct link to lhs_oauth_introspect_url" title="Direct link to lhs_oauth_introspect_url">​</a></h3>
+<p>Optional OAuth server introspection URL. Used by the server to authenticate tokens from incoming calls.
+This OAuth server introspection URL is used by all <code>OAUTH</code> listeners.</p>
+<blockquote>
+<p>Needs to be set if any listener specifies <code>OAUTH</code> as an authentication mechanism in <code>LHS_LISTENERS_AUTHENTICATION_MAP</code></p>
+</blockquote>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_AUTHENTICATION_MAP=MY_LISTENER:OAUTH</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_OAUTH_INTROSPECT_URL=http://localhost:8888/realms/lh/protocol/openid-connect/token/introspect</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> url</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_oauth_client_id"><code>LHS_OAUTH_CLIENT_ID</code><a href="#lhs_oauth_client_id" class="hash-link" aria-label="Direct link to lhs_oauth_client_id" title="Direct link to lhs_oauth_client_id">​</a></h3>
+<p>Optional OAuth2 Client Id. This OAuth client id is used by all <code>OAUTH</code> listeners, and authenticates all incoming calls against the OAuth server.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_AUTHENTICATION_MAP=MY_LISTENER:OAUTH</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_OAUTH_CLIENT_ID=server</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_oauth_client_id_file"><code>LHS_OAUTH_CLIENT_ID_FILE</code><a href="#lhs_oauth_client_id_file" class="hash-link" aria-label="Direct link to lhs_oauth_client_id_file" title="Direct link to lhs_oauth_client_id_file">​</a></h3>
+<p>Optional OAuth2 Client Id. This OAuth client id is used by all <code>OAUTH</code> listeners, and authenticates all incoming calls against the OAuth server.
+If it is different to null it overrides the <code>LHS_OAUTH_CLIENT_ID</code> config and loads the client id from the file.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_AUTHENTICATION_MAP=MY_LISTENER:OAUTH</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_OAUTH_CLIENT_ID_FILE=/temp/client_id</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_oauth_client_secret"><code>LHS_OAUTH_CLIENT_SECRET</code><a href="#lhs_oauth_client_secret" class="hash-link" aria-label="Direct link to lhs_oauth_client_secret" title="Direct link to lhs_oauth_client_secret">​</a></h3>
+<p>Optional OAuth2 Client Secret. This OAuth client secret is used by all <code>OAUTH</code> listeners, and authenticates all incoming calls against the OAuth server.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_AUTHENTICATION_MAP=MY_LISTENER:OAUTH</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_OAUTH_CLIENT_SECRET=3bdca420cf6c48e2aa4f56d46d6327e0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_oauth_client_secret_file"><code>LHS_OAUTH_CLIENT_SECRET_FILE</code><a href="#lhs_oauth_client_secret_file" class="hash-link" aria-label="Direct link to lhs_oauth_client_secret_file" title="Direct link to lhs_oauth_client_secret_file">​</a></h3>
+<p>Optional OAuth2 Client Secret. This OAuth client secret is used by all <code>OAUTH</code> listeners, and authenticates all incoming calls against the OAuth server.
+If it is different to null it overrides the <code>LHS_OAUTH_CLIENT_SECRET</code> config and loads the secret from the file.</p>
+<p>Example:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS=MY_LISTENER:2023</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_LISTENERS_AUTHENTICATION_MAP=MY_LISTENER:OAUTH</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">LHS_OAUTH_CLIENT_SECRET_FILE=/temp/client_secret</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">...</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_advertised_listeners"><code>LHS_ADVERTISED_LISTENERS</code><a href="#lhs_advertised_listeners" class="hash-link" aria-label="Direct link to lhs_advertised_listeners" title="Direct link to lhs_advertised_listeners">​</a></h3>
+<p>It represents the hostnames and ports that clients and workers should us to connect to this server.</p>
+<p>Format: <code>&lt;NAME&gt;://&lt;HOSTNAME&gt;:&lt;TPC PORT&gt;</code></p>
+<p>Examples of legal advertised listener lists: <code>FOR_WORKERS://localhost:2023,FOR_LHCTL://127.0.0.1:2023</code></p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> PLAIN://localhost:2023</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="server-behavior">Server Behavior<a href="#server-behavior" class="hash-link" aria-label="Direct link to Server Behavior" title="Direct link to Server Behavior">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_cluster_id"><code>LHS_CLUSTER_ID</code><a href="#lhs_cluster_id" class="hash-link" aria-label="Direct link to lhs_cluster_id" title="Direct link to lhs_cluster_id">​</a></h3>
+<p>An identifier for the stream processing application. Must be unique within the LittleHorse cluster. It is used as 1) the default <code>client-id</code> prefix, 2) the <code>group-id</code> for membership management, 3) the changelog topic prefix. <a href="https://kafka.apache.org/documentation/#streamsconfigs_application.id" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> cluster1</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_instance_id"><code>LHS_INSTANCE_ID</code><a href="#lhs_instance_id" class="hash-link" aria-label="Direct link to lhs_instance_id" title="Direct link to lhs_instance_id">​</a></h3>
+<p>An optional ordinal integer describing the order in which this Server was added to the cluster. If provided, it <strong>must</strong> be unique. Providing this configuration allows LittleHorse to make better decisions about Kafka Streams Task Assignment when adding or removing servers. For a specific server, this should be consistent across restarts. Must be positive.</p>
+<ul>
+<li><strong>Type:</strong> Short</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_rack_id"><code>LHS_RACK_ID</code><a href="#lhs_rack_id" class="hash-link" aria-label="Direct link to lhs_rack_id" title="Direct link to lhs_rack_id">​</a></h3>
+<p>Provides rack awareness to the cluster. Used in two ways:</p>
+<ul>
+<li>To ensure that standby tasks are scheduled in different rack&#x27;s than their active tasks (<a href="https://kafka.apache.org/documentation/#streamsconfigs_rack.aware.assignment.tags" target="_blank" rel="noopener noreferrer">Kafka Official</a>).</li>
+<li>To enable follower fetching for standby tasks. Reduces networking costs without impacting application performance.</li>
+</ul>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_should_create_topics"><code>LHS_SHOULD_CREATE_TOPICS</code><a href="#lhs_should_create_topics" class="hash-link" aria-label="Direct link to lhs_should_create_topics" title="Direct link to lhs_should_create_topics">​</a></h3>
+<p>Defines if the server should create its own topics. It is useful for development environments. <em>Disable this for production environments</em> <code>LHS_SHOULD_CREATE_TOPICS=false</code>.</p>
+<ul>
+<li><strong>Type:</strong> boolean</li>
+<li><strong>Default:</strong> true</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_replication_factor"><code>LHS_REPLICATION_FACTOR</code><a href="#lhs_replication_factor" class="hash-link" aria-label="Direct link to lhs_replication_factor" title="Direct link to lhs_replication_factor">​</a></h3>
+<p>The replication factor for change log topics and repartition topics created by the stream processing application. <a href="https://kafka.apache.org/documentation/#streamsconfigs_replication.factor" target="_blank" rel="noopener noreferrer">Kafka Official</a>. Disabled if <code>LHS_SHOULD_CREATE_TOPICS=false</code>.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 1</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_cluster_partitions"><code>LHS_CLUSTER_PARTITIONS</code><a href="#lhs_cluster_partitions" class="hash-link" aria-label="Direct link to lhs_cluster_partitions" title="Direct link to lhs_cluster_partitions">​</a></h3>
+<p>The number of partitions in each internal kafka topic. Necessary whether or not <code>LHS_SHOULD_CREATE_TOPICS</code> is set.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 12</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_core_stream_threads"><code>LHS_CORE_STREAM_THREADS</code><a href="#lhs_core_stream_threads" class="hash-link" aria-label="Direct link to lhs_core_stream_threads" title="Direct link to lhs_core_stream_threads">​</a></h3>
+<p>The number of threads to execute stream processing in the Core Topology. <a href="https://kafka.apache.org/documentation/#streamsconfigs_num.stream.threads" target="_blank" rel="noopener noreferrer">Kafka Official</a>. For a server with <code>N</code> cores, we recommend setting this to <code>N * 0.6</code>.</p>
+<ul>
+<li><strong>Type:</strong> int, &gt;= 1</li>
+<li><strong>Default:</strong> 1</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_timer_stream_threads"><code>LHS_TIMER_STREAM_THREADS</code><a href="#lhs_timer_stream_threads" class="hash-link" aria-label="Direct link to lhs_timer_stream_threads" title="Direct link to lhs_timer_stream_threads">​</a></h3>
+<p>The number of threads to execute stream processing in the Timer Topology. <a href="https://kafka.apache.org/documentation/#streamsconfigs_num.stream.threads" target="_blank" rel="noopener noreferrer">Kafka Official</a>. For a server with <code>N</code> cores, we recommend setting this to <code>N * 0.4</code>.</p>
+<ul>
+<li><strong>Type:</strong> int, &gt;= 1</li>
+<li><strong>Default:</strong> 1</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_num_network_threads"><code>LHS_NUM_NETWORK_THREADS</code><a href="#lhs_num_network_threads" class="hash-link" aria-label="Direct link to lhs_num_network_threads" title="Direct link to lhs_num_network_threads">​</a></h3>
+<p>The size of the shared Threadpool used by the grpc listeners.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 2</li>
+<li><strong>Minimum:</strong> 2</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_streams_metrics_level"><code>LHS_STREAMS_METRICS_LEVEL</code><a href="#lhs_streams_metrics_level" class="hash-link" aria-label="Direct link to lhs_streams_metrics_level" title="Direct link to lhs_streams_metrics_level">​</a></h3>
+<p>The level of granularity to collect Kafka Streams Metrics. Passes through to Kafka Streams <code>metrics.recording.level</code>.</p>
+<ul>
+<li><strong>Type:</strong> info|debug|trace</li>
+<li><strong>Default:</strong> info</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_streams_session_timeout"><code>LHS_STREAMS_SESSION_TIMEOUT</code><a href="#lhs_streams_session_timeout" class="hash-link" aria-label="Direct link to lhs_streams_session_timeout" title="Direct link to lhs_streams_session_timeout">​</a></h3>
+<p>The timeout used to detect client failures when using Kafka&#x27;s group management facility. <a href="https://kafka.apache.org/documentation/#consumerconfigs_session.timeout.ms" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 30000 (30 seconds)</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_core_streams_commit_interval"><code>LHS_CORE_STREAMS_COMMIT_INTERVAL</code><a href="#lhs_core_streams_commit_interval" class="hash-link" aria-label="Direct link to lhs_core_streams_commit_interval" title="Direct link to lhs_core_streams_commit_interval">​</a></h3>
+<p>The frequency in milliseconds with which to commit processing progress on the Core Topology. <a href="https://kafka.apache.org/documentation/#streamsconfigs_commit.interval.ms" target="_blank" rel="noopener noreferrer">Kafka Official</a>. For the Core Topology, we recommend setting it to 5000 milliseconds. A large enough value along with a large value for <code>LHS_CORE_STATESTORE_CACHE_BYTES</code> will result in fewer records emitted to the Kafka Streams Changelog topics.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 5000</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_timer_streams_commit_interval"><code>LHS_TIMER_STREAMS_COMMIT_INTERVAL</code><a href="#lhs_timer_streams_commit_interval" class="hash-link" aria-label="Direct link to lhs_timer_streams_commit_interval" title="Direct link to lhs_timer_streams_commit_interval">​</a></h3>
+<p>The frequency in milliseconds with which to commit processing progress on the Timer Topology. <a href="https://kafka.apache.org/documentation/#streamsconfigs_commit.interval.ms" target="_blank" rel="noopener noreferrer">Kafka Official</a>. For the Timer Topology, we recommend setting it to 30000 milliseconds. A large enough value along with a large value for <code>LHS_TIMER_STATESTORE_CACHE_BYTES</code> will result in fewer records emitted to the Kafka Streams Changelog topics.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 30000</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_state_dir"><code>LHS_STATE_DIR</code><a href="#lhs_state_dir" class="hash-link" aria-label="Direct link to lhs_state_dir" title="Direct link to lhs_state_dir">​</a></h3>
+<p>Directory location for state store. This path must be unique for each streams instance sharing the same underlying filesystem. <a href="https://kafka.apache.org/documentation/#streamsconfigs_state.dir" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> path</li>
+<li><strong>Default:</strong> /tmp/kafkaState</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_streams_num_standby_replicas"><code>LHS_STREAMS_NUM_STANDBY_REPLICAS</code><a href="#lhs_streams_num_standby_replicas" class="hash-link" aria-label="Direct link to lhs_streams_num_standby_replicas" title="Direct link to lhs_streams_num_standby_replicas">​</a></h3>
+<p>The number of standby replicas for each task. Applies to both Core and Timer topologies. <a href="https://kafka.apache.org/documentation/#streamsconfigs_num.standby.replicas" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 0</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_streams_num_warmup_replicas"><code>LHS_STREAMS_NUM_WARMUP_REPLICAS</code><a href="#lhs_streams_num_warmup_replicas" class="hash-link" aria-label="Direct link to lhs_streams_num_warmup_replicas" title="Direct link to lhs_streams_num_warmup_replicas">​</a></h3>
+<p>The maximum number of warmup replicas (extra standbys beyond the configured num.standbys) that can be assigned at once for the purpose of keeping the task available on one instance while it is warming up on another instance it has been reassigned to. <a href="https://kafka.apache.org/documentation/#streamsconfigs_max.warmup.replicas" target="_blank" rel="noopener noreferrer">Kafka Official</a>.</p>
+<p>The same config is used by both the Core and Timer Topologies. Note that if you set <code>LHS_STREAMS_NUM_WARMUP_REPLICAS = N</code>, then there can be up to <code>2 * N</code> warmup replicas scheduled.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 12</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_core_memtable_size_bytes"><code>LHS_CORE_MEMTABLE_SIZE_BYTES</code><a href="#lhs_core_memtable_size_bytes" class="hash-link" aria-label="Direct link to lhs_core_memtable_size_bytes" title="Direct link to lhs_core_memtable_size_bytes">​</a></h3>
+<p>The size of a RocksDB Memtable (aka Write Buffer) for the Core Topology.</p>
+<ul>
+<li><strong>Type:</strong> long</li>
+<li><strong>Default:</strong> 67108864 (64MB)</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_timer_memtable_size_bytes"><code>LHS_TIMER_MEMTABLE_SIZE_BYTES</code><a href="#lhs_timer_memtable_size_bytes" class="hash-link" aria-label="Direct link to lhs_timer_memtable_size_bytes" title="Direct link to lhs_timer_memtable_size_bytes">​</a></h3>
+<p>The size of a RocksDB Memtable (aka Write Buffer) for the Timer Topology.</p>
+<ul>
+<li><strong>Type:</strong> long</li>
+<li><strong>Default:</strong> 33554432 (32MB)</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_core_statestore_cache_bytes"><code>LHS_CORE_STATESTORE_CACHE_BYTES</code><a href="#lhs_core_statestore_cache_bytes" class="hash-link" aria-label="Direct link to lhs_core_statestore_cache_bytes" title="Direct link to lhs_core_statestore_cache_bytes">​</a></h3>
+<p>The size of the Kafka Streams State Store Cache on the Core Topology. This cache is put in front of RocksDB (i.e. before any writes to the Memtable) and is flushed on every Streams Commit (<code>LHS_CORE_STREAMS_COMMIT_INTERVAL</code>). This cache is shared by all Core Topology state stores on a server. A large enough value will result in fewer records emitted to the Kafka Streams Changelog topic.</p>
+<ul>
+<li><strong>Type:</strong> long</li>
+<li><strong>Default:</strong> 33554432 (32MB)</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_timer_statestore_cache_bytes"><code>LHS_TIMER_STATESTORE_CACHE_BYTES</code><a href="#lhs_timer_statestore_cache_bytes" class="hash-link" aria-label="Direct link to lhs_timer_statestore_cache_bytes" title="Direct link to lhs_timer_statestore_cache_bytes">​</a></h3>
+<p>The size of the Kafka Streams State Store Cache on the Timer Topology. This cache is put in front of RocksDB (i.e. before any writes to the Memtable) and is flushed on every Streams Commit (<code>LHS_TIMER_STREAMS_COMMIT_INTERVAL</code>). A large enough value will result in fewer records emitted to the Kafka Streams Changelog topic.</p>
+<ul>
+<li><strong>Type:</strong> long</li>
+<li><strong>Default:</strong> 67108864 (64MB)</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_rocksdb_total_block_cache_bytes"><code>LHS_ROCKSDB_TOTAL_BLOCK_CACHE_BYTES</code><a href="#lhs_rocksdb_total_block_cache_bytes" class="hash-link" aria-label="Direct link to lhs_rocksdb_total_block_cache_bytes" title="Direct link to lhs_rocksdb_total_block_cache_bytes">​</a></h3>
+<p>The size of the shared Block Cache for reads into RocksDB. Memory used by this cache is allocated off-heap. If not set, then there is no limit and the Kafka Streams default is used (each RocksDB instance gets its own 50-MB cache).</p>
+<ul>
+<li><strong>Type:</strong> long</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_rocksdb_total_memtable_bytes"><code>LHS_ROCKSDB_TOTAL_MEMTABLE_BYTES</code><a href="#lhs_rocksdb_total_memtable_bytes" class="hash-link" aria-label="Direct link to lhs_rocksdb_total_memtable_bytes" title="Direct link to lhs_rocksdb_total_memtable_bytes">​</a></h3>
+<p>The capacity of the Rocksdb Write Buffer Manager. Memory used by the Write Buffer Manager is allocated off-heap. If not set, then there is no limit for off-heap memory allocated to memtables.</p>
+<ul>
+<li><strong>Type:</strong> long</li>
+<li><strong>Default:</strong> null</li>
+<li><strong>Importance:</strong> high</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_rocksdb_compaction_threads"><code>LHS_ROCKSDB_COMPACTION_THREADS</code><a href="#lhs_rocksdb_compaction_threads" class="hash-link" aria-label="Direct link to lhs_rocksdb_compaction_threads" title="Direct link to lhs_rocksdb_compaction_threads">​</a></h3>
+<p>The number of threads for RocksDB to use for compaction in the background. From the RocksDB documentation, a good value for this config is the number of cores on your LH Server.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 1</li>
+<li><strong>Importance:</strong> medium</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="monitoring">Monitoring<a href="#monitoring" class="hash-link" aria-label="Direct link to Monitoring" title="Direct link to Monitoring">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_health_service_port"><code>LHS_HEALTH_SERVICE_PORT</code><a href="#lhs_health_service_port" class="hash-link" aria-label="Direct link to lhs_health_service_port" title="Direct link to lhs_health_service_port">​</a></h3>
+<p>The port that the healthchecks and prometheus metrics are exposed on.</p>
+<ul>
+<li><strong>Type:</strong> int</li>
+<li><strong>Default:</strong> 1822</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_health_path_metrics"><code>LHS_HEALTH_PATH_METRICS</code><a href="#lhs_health_path_metrics" class="hash-link" aria-label="Direct link to lhs_health_path_metrics" title="Direct link to lhs_health_path_metrics">​</a></h3>
+<p>The path to scrape metrics from.</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> /metrics</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_health_path_readinesss"><code>LHS_HEALTH_PATH_READINESSS</code><a href="#lhs_health_path_readinesss" class="hash-link" aria-label="Direct link to lhs_health_path_readinesss" title="Direct link to lhs_health_path_readinesss">​</a></h3>
+<p>The path upon which application readiness (the ability to serve requests) is exposed.</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> /readiness</li>
+<li><strong>Importance:</strong> low</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhs_health_path_liveness"><code>LHS_HEALTH_PATH_LIVENESS</code><a href="#lhs_health_path_liveness" class="hash-link" aria-label="Direct link to lhs_health_path_liveness" title="Direct link to lhs_health_path_liveness">​</a></h3>
+<p>The path upon which application liveness (the ability to ).</p>
+<ul>
+<li><strong>Type:</strong> string</li>
+<li><strong>Default:</strong> /metrics</li>
+<li><strong>Importance:</strong> low</li>
+</ul></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/operations/overview"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Operations Overview</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/operations/dashboard-configuration"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Dashboard Configurations</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#kafka" class="table-of-contents__link toc-highlight">Kafka</a><ul><li><a href="#lhs_kafka_bootstrap_servers" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_BOOTSTRAP_SERVERS</code></a></li><li><a href="#lhs_kafka_keystore" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_KEYSTORE</code></a></li><li><a href="#lhs_kafka_keystore_password" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_KEYSTORE_PASSWORD</code></a></li><li><a href="#lhs_kafka_keystore_password_file" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_KEYSTORE_PASSWORD_FILE</code></a></li><li><a href="#lhs_kafka_truststore" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_TRUSTSTORE</code></a></li><li><a href="#lhs_kafka_truststore_password" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_TRUSTSTORE_PASSWORD</code></a></li><li><a href="#lhs_kafka_truststore_password_file" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_TRUSTSTORE_PASSWORD_FILE</code></a></li><li><a href="#lhs_kafka_security_protocol" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_SECURITY_PROTOCOL</code></a></li><li><a href="#lhs_kafka_sasl_mechanism" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_SASL_MECHANISM</code></a></li><li><a href="#lhs_kafka_sasl_jaas_config" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_SASL_JAAS_CONFIG</code></a></li><li><a href="#lhs_kafka_sasl_jaas_config_file" class="table-of-contents__link toc-highlight"><code>LHS_KAFKA_SASL_JAAS_CONFIG_FILE</code></a></li></ul></li><li><a href="#server-internal-connections" class="table-of-contents__link toc-highlight">Server Internal Connections</a><ul><li><a href="#lhs_internal_bind_port" class="table-of-contents__link toc-highlight"><code>LHS_INTERNAL_BIND_PORT</code></a></li><li><a href="#lhs_internal_advertised_host" class="table-of-contents__link toc-highlight"><code>LHS_INTERNAL_ADVERTISED_HOST</code></a></li><li><a href="#lhs_internal_advertised_port" class="table-of-contents__link toc-highlight"><code>LHS_INTERNAL_ADVERTISED_PORT</code></a></li><li><a href="#lhs_internal_server_cert" class="table-of-contents__link toc-highlight"><code>LHS_INTERNAL_SERVER_CERT</code></a></li><li><a href="#lhs_internal_server_key" class="table-of-contents__link toc-highlight"><code>LHS_INTERNAL_SERVER_KEY</code></a></li><li><a href="#lhs_internal_ca_cert" class="table-of-contents__link toc-highlight"><code>LHS_INTERNAL_CA_CERT</code></a></li></ul></li><li><a href="#server-external-connections" class="table-of-contents__link toc-highlight">Server External Connections</a><ul><li><a href="#lhs_listeners" class="table-of-contents__link toc-highlight"><code>LHS_LISTENERS</code></a></li><li><a href="#lhs_listeners_protocol_map" class="table-of-contents__link toc-highlight"><code>LHS_LISTENERS_PROTOCOL_MAP</code></a></li><li><a href="#lhs_listener_listener-name_cert" class="table-of-contents__link toc-highlight"><code>LHS_LISTENER_&lt;LISTENER NAME&gt;_CERT</code></a></li><li><a href="#lhs_listener_listener-name_key" class="table-of-contents__link toc-highlight"><code>LHS_LISTENER_&lt;LISTENER NAME&gt;_KEY</code></a></li><li><a href="#lhs_ca_cert" class="table-of-contents__link toc-highlight"><code>LHS_CA_CERT</code></a></li><li><a href="#lhs_listeners_authentication_map" class="table-of-contents__link toc-highlight"><code>LHS_LISTENERS_AUTHENTICATION_MAP</code></a></li><li><a href="#lhs_oauth_introspect_url" class="table-of-contents__link toc-highlight"><code>LHS_OAUTH_INTROSPECT_URL</code></a></li><li><a href="#lhs_oauth_client_id" class="table-of-contents__link toc-highlight"><code>LHS_OAUTH_CLIENT_ID</code></a></li><li><a href="#lhs_oauth_client_id_file" class="table-of-contents__link toc-highlight"><code>LHS_OAUTH_CLIENT_ID_FILE</code></a></li><li><a href="#lhs_oauth_client_secret" class="table-of-contents__link toc-highlight"><code>LHS_OAUTH_CLIENT_SECRET</code></a></li><li><a href="#lhs_oauth_client_secret_file" class="table-of-contents__link toc-highlight"><code>LHS_OAUTH_CLIENT_SECRET_FILE</code></a></li><li><a href="#lhs_advertised_listeners" class="table-of-contents__link toc-highlight"><code>LHS_ADVERTISED_LISTENERS</code></a></li></ul></li><li><a href="#server-behavior" class="table-of-contents__link toc-highlight">Server Behavior</a><ul><li><a href="#lhs_cluster_id" class="table-of-contents__link toc-highlight"><code>LHS_CLUSTER_ID</code></a></li><li><a href="#lhs_instance_id" class="table-of-contents__link toc-highlight"><code>LHS_INSTANCE_ID</code></a></li><li><a href="#lhs_rack_id" class="table-of-contents__link toc-highlight"><code>LHS_RACK_ID</code></a></li><li><a href="#lhs_should_create_topics" class="table-of-contents__link toc-highlight"><code>LHS_SHOULD_CREATE_TOPICS</code></a></li><li><a href="#lhs_replication_factor" class="table-of-contents__link toc-highlight"><code>LHS_REPLICATION_FACTOR</code></a></li><li><a href="#lhs_cluster_partitions" class="table-of-contents__link toc-highlight"><code>LHS_CLUSTER_PARTITIONS</code></a></li><li><a href="#lhs_core_stream_threads" class="table-of-contents__link toc-highlight"><code>LHS_CORE_STREAM_THREADS</code></a></li><li><a href="#lhs_timer_stream_threads" class="table-of-contents__link toc-highlight"><code>LHS_TIMER_STREAM_THREADS</code></a></li><li><a href="#lhs_num_network_threads" class="table-of-contents__link toc-highlight"><code>LHS_NUM_NETWORK_THREADS</code></a></li><li><a href="#lhs_streams_metrics_level" class="table-of-contents__link toc-highlight"><code>LHS_STREAMS_METRICS_LEVEL</code></a></li><li><a href="#lhs_streams_session_timeout" class="table-of-contents__link toc-highlight"><code>LHS_STREAMS_SESSION_TIMEOUT</code></a></li><li><a href="#lhs_core_streams_commit_interval" class="table-of-contents__link toc-highlight"><code>LHS_CORE_STREAMS_COMMIT_INTERVAL</code></a></li><li><a href="#lhs_timer_streams_commit_interval" class="table-of-contents__link toc-highlight"><code>LHS_TIMER_STREAMS_COMMIT_INTERVAL</code></a></li><li><a href="#lhs_state_dir" class="table-of-contents__link toc-highlight"><code>LHS_STATE_DIR</code></a></li><li><a href="#lhs_streams_num_standby_replicas" class="table-of-contents__link toc-highlight"><code>LHS_STREAMS_NUM_STANDBY_REPLICAS</code></a></li><li><a href="#lhs_streams_num_warmup_replicas" class="table-of-contents__link toc-highlight"><code>LHS_STREAMS_NUM_WARMUP_REPLICAS</code></a></li><li><a href="#lhs_core_memtable_size_bytes" class="table-of-contents__link toc-highlight"><code>LHS_CORE_MEMTABLE_SIZE_BYTES</code></a></li><li><a href="#lhs_timer_memtable_size_bytes" class="table-of-contents__link toc-highlight"><code>LHS_TIMER_MEMTABLE_SIZE_BYTES</code></a></li><li><a href="#lhs_core_statestore_cache_bytes" class="table-of-contents__link toc-highlight"><code>LHS_CORE_STATESTORE_CACHE_BYTES</code></a></li><li><a href="#lhs_timer_statestore_cache_bytes" class="table-of-contents__link toc-highlight"><code>LHS_TIMER_STATESTORE_CACHE_BYTES</code></a></li><li><a href="#lhs_rocksdb_total_block_cache_bytes" class="table-of-contents__link toc-highlight"><code>LHS_ROCKSDB_TOTAL_BLOCK_CACHE_BYTES</code></a></li><li><a href="#lhs_rocksdb_total_memtable_bytes" class="table-of-contents__link toc-highlight"><code>LHS_ROCKSDB_TOTAL_MEMTABLE_BYTES</code></a></li><li><a href="#lhs_rocksdb_compaction_threads" class="table-of-contents__link toc-highlight"><code>LHS_ROCKSDB_COMPACTION_THREADS</code></a></li></ul></li><li><a href="#monitoring" class="table-of-contents__link toc-highlight">Monitoring</a><ul><li><a href="#lhs_health_service_port" class="table-of-contents__link toc-highlight"><code>LHS_HEALTH_SERVICE_PORT</code></a></li><li><a href="#lhs_health_path_metrics" class="table-of-contents__link toc-highlight"><code>LHS_HEALTH_PATH_METRICS</code></a></li><li><a href="#lhs_health_path_readinesss" class="table-of-contents__link toc-highlight"><code>LHS_HEALTH_PATH_READINESSS</code></a></li><li><a href="#lhs_health_path_liveness" class="table-of-contents__link toc-highlight"><code>LHS_HEALTH_PATH_LIVENESS</code></a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/concepts">Concepts</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/developer-guide">Developer Guide</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://launchpass.com/littlehorsecommunity" target="_blank" rel="noopener noreferrer" class="footer__link-item">Slack<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://github.com/littlehorse-enterprises/littlehorse" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 LittleHorse Enterprises LLC.</div></div></div></footer></div>
+</body>
+</html>

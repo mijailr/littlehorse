@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>LittleHorse Blog</title>
+        <link>https://littlehorse.dev/blog</link>
+        <description>LittleHorse Blog</description>
+        <lastBuildDate>Sun, 28 Jan 2024 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Releasing 0.7]]></title>
+            <link>https://littlehorse.dev/blog/littlehorse-0.7-release</link>
+            <guid>https://littlehorse.dev/blog/littlehorse-0.7-release</guid>
+            <pubDate>Sun, 28 Jan 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Approaching a stable `1.0.0` release.]]></description>
+            <content:encoded><![CDATA[<p>We are excited to announce the release of <code>0.7.2</code>!  This is our last release before we cut <code>1.0.0</code>, which will be the first stable and production-ready LittleHorse distribution.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="get-started">Get Started<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#get-started" class="hash-link" aria-label="Direct link to Get Started" title="Direct link to Get Started">​</a></h2>
+<p>LittleHorse is free for production use according to the Server-Side Public License!</p>
+<p>To get started with LittleHorse OSS, you can:</p>
+<ul>
+<li>Visit us on <a href="https://github.com/littlehorse-enterprises" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+<li>Try our <a href="https://littlehorse.dev/docs/developer-guide/install#installation-and-quickstart" target="_blank" rel="noopener noreferrer">quickstarts</a> or watch our founder, Colt, go through them in <a href="https://www.youtube.com/watch?v=8Zo_UOStg98&amp;t=6s" target="_blank" rel="noopener noreferrer">Java</a>, <a href="https://www.youtube.com/watch?v=oZQc2ISSZsk" target="_blank" rel="noopener noreferrer">Go</a>, or <a href="https://www.youtube.com/watch?v=l3TZOjfpzTw" target="_blank" rel="noopener noreferrer">Python</a></li>
+<li>Join our <a href="https://launchpass.com/littlehorse-community" target="_blank" rel="noopener noreferrer">Slack Community</a> for quick and responsive help!</li>
+</ul>
+<p>Also, LittleHorse Enterprises LLC has released its first out our <a href="https://littlehorse.io/" target="_blank" rel="noopener noreferrer">product-focused website</a>! If you're still curious and want to learn even more, check out a few of our new in-depth tutorial series on <a href="https://www.youtube.com/@LittleHorse-ey3vw/featured" target="_blank" rel="noopener noreferrer">our YouTube page</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h2>
+<p>Release <code>0.7</code> introduces many features designed to make your life easier. We plan to write blogs about all of them, so stay tuned!</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="administrative-dashboard">Administrative Dashboard<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#administrative-dashboard" class="hash-link" aria-label="Direct link to Administrative Dashboard" title="Direct link to Administrative Dashboard">​</a></h3>
+<p>The most exciting part of the <code>0.7.2</code> release of LittleHorse is the new LH Dashboard, which is an administrative portal into your LittleHorse Cluster. The LH Dashboard lets you check on all of your workflows and tasks and debug everything visually with fine-grained detail. Our quickstarts (see above) have everything you need to get started debugging your workflows with our dashboard.</p>
+<p>The LH Dashboard is in the alpha stage, so we appreciate any bug reports or feature requests. Please file them on <a href="https://github.com/littlehorse-enterprises/littlehorse/issues" target="_blank" rel="noopener noreferrer">our github</a>!</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="idempotent-metadata-management">Idempotent Metadata Management<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#idempotent-metadata-management" class="hash-link" aria-label="Direct link to Idempotent Metadata Management" title="Direct link to Idempotent Metadata Management">​</a></h3>
+<p>Managing your <code>WfSpec</code>s and <code>TaskDef</code>s just got much easier. Check out our <a href="https://littlehorse.dev/docs/developer-guide/grpc/managing-metadata" target="_blank" rel="noopener noreferrer">updated docs</a> for tutorials on how to keep your DevOps team happy and seamlessly integrate LittleHorse into your normal application development lifecycle.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="child-workflows">Child Workflows<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#child-workflows" class="hash-link" aria-label="Direct link to Child Workflows" title="Direct link to Child Workflows">​</a></h3>
+<p>We also added the ability to run a <code>WfRun</code> which is a "child" of another <code>WfRun</code>. This allows for some interesting features, most importantly:</p>
+<ul>
+<li>Sharing <code>Variable</code>s between <code>WfRun</code>'s</li>
+<li>Foreign-key relationships between the child and parent <code>WfRun</code>'s.</li>
+</ul>
+<p>Stay tuned for an upcoming blog about <em>why</em> we added that feature. It was guided by our resident Domain-Driven Design expert, Eduwer Camacaro! Here's a hint: this feature makes it possible to use LittleHorse Workflows as a native data store for complex business entities. This is a great way to implement the "Aggregate Pattern."</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enhanced-searchwfrun">Enhanced <code>SearchWfRun</code><a href="https://littlehorse.dev/blog/littlehorse-0.7-release#enhanced-searchwfrun" class="hash-link" aria-label="Direct link to enhanced-searchwfrun" title="Direct link to enhanced-searchwfrun">​</a></h3>
+<p>The <code>rpc SearchWfRun</code> request now has a <code>repeated VariableMatch variable_filters</code> field on it. This allows you to filter <code>WfRun</code>'s by the value of one or more <code>Variable</code>'s when searching for them, returning only matching <code>WfRun</code>'s. This is super useful when using a LittleHorse <code>WfRun</code> to model a business entity, and you need to do something like "find all orders placed by <code>user-id == john</code> and <code>status == OUT_FOR_SHIPPING</code>".</p>
+<p>In the past, this was possible using the <code>rpc SearchVariable</code> and then back the <code>WfRunId</code> out of the <code>VariableId</code>; however, that method is a little bit clunky. In reality, our users want to find a <code>WfRunId</code> matching certain criteria; they're not looking for a <code>Variable</code>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-next">What's Next?<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#whats-next" class="hash-link" aria-label="Direct link to What's Next?" title="Direct link to What's Next?">​</a></h2>
+<p>We couldn't be more excited about what is coming next.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="apache2-clients">Apache2 Clients<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#apache2-clients" class="hash-link" aria-label="Direct link to Apache2 Clients" title="Direct link to Apache2 Clients">​</a></h3>
+<p>Some members of the community have expressed concerns about our clients (SDK's + GRPC code) being licensed by the SSPL license. We heard you, and we will update them to the Apache 2.0 License before our <code>1.0.0</code> release! The server will remain SSPL.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="tutorials">Tutorials<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#tutorials" class="hash-link" aria-label="Direct link to Tutorials" title="Direct link to Tutorials">​</a></h3>
+<p>One of our team members, Sohini, has been hard at work creating video tutorials which will help you get quickly up to speed on advanced LittleHorse concepts. You can find them here on our <a href="https://www.youtube.com/@LittleHorse-ey3vw/playlists" target="_blank" rel="noopener noreferrer">YouTube</a>.</p>
+<p>Additionally, our founder has recorded a series of zoom meetings with himself (yes, you read that right...Colt used zoom to record a tutorial video series) going through quickstarts in all of our three SDK's. You can find them here in <a href="https://www.youtube.com/watch?v=8Zo_UOStg98&amp;t=6s" target="_blank" rel="noopener noreferrer">Java</a>, <a href="https://www.youtube.com/watch?v=oZQc2ISSZsk" target="_blank" rel="noopener noreferrer">Go</a>, or <a href="https://www.youtube.com/watch?v=l3TZOjfpzTw" target="_blank" rel="noopener noreferrer">Python</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="approaching-100">Approaching <code>1.0.0</code><a href="https://littlehorse.dev/blog/littlehorse-0.7-release#approaching-100" class="hash-link" aria-label="Direct link to approaching-100" title="Direct link to approaching-100">​</a></h3>
+<p>What's missing before <code>1.0.0</code>? We have some in-progress features that are already merged to <code>master</code> but only partially implemented. If you squint hard enough at our GRPC Api, you might notice that we have support for multi-tenancy and also fine-grained ACL's. They are NOT ready for production use as we need to iron out a few wrinkles, but we will have them ready for <code>1.0.0</code>. We also are working on an <code>rpc MigrateWfSpec</code> which allows you to migrate a running <code>WfRun</code> from an older version of a <code>WfSpec</code> to a newer version. This is hard work for us but it will be highly useful for our users.</p>
+<p>Additionally, we are expanding our end-to-end test coverage to try to shake out as many issues as possible <em>before</em> our users tell us about them. So far, the rate of new bugs that we've discovered has slowed down considerably, which makes us think we are getting close to the quality we expect from our own product.</p>
+<p>What will change when we release <code>1.0.0</code>? We will be following <a href="https://semver.org/" target="_blank" rel="noopener noreferrer">Semantic Versioning</a> to the letter, which means we will be paying <em>super close attention</em> to any breaking changes to our API. If we want our users to use us for mission critical workloads, we need to take stability seriously—both in terms of performance and API compatibility.</p>
+<p>We will also likely have three minor releases per year, with 12 months of patch support for each minor release. This release schedule is copied from Apache Kafka.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lh-cloud">LH Cloud<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#lh-cloud" class="hash-link" aria-label="Direct link to LH Cloud" title="Direct link to LH Cloud">​</a></h3>
+<p>Lastly, stay tuned for LittleHorse Cloud! Early access is open. If you would like to sign up for early access to LH Cloud, visit <a href="https://www.littlehorse.io/lh-cloud" target="_blank" rel="noopener noreferrer">our website</a> or contact <code>sales@littlehorse.io</code>.</p>]]></content:encoded>
+            <category>littlehorse</category>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Releasing 0.5.0]]></title>
+            <link>https://littlehorse.dev/blog/littlehorse-0.5.0-release</link>
+            <guid>https://littlehorse.dev/blog/littlehorse-0.5.0-release</guid>
+            <pubDate>Fri, 08 Sep 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Python, For-Each, LH Platform.]]></description>
+            <content:encoded><![CDATA[<p>We are excited to announce the minor release <code>0.5.0</code>.  This release is highlighted by:</p>
+<ul>
+<li>Alpha support for building <code>WfSpec</code>s in Python.</li>
+<li>Improved monitoring and health metrics on the LittleHorse Server.</li>
+<li>Support for looping over a <code>JSON_ARR</code> and launching threads in parallel for each element.</li>
+<li>Improved Exception Handling.</li>
+<li>Limited early access for LittleHorse Platform.</li>
+</ul>
+<p>In this release, we made great strides towards full Python support, improved monitoring and observability, and added the ability to spawn threads in parallel looping over a <code>JSON_ARR</code> variable.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="get-started">Get Started<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#get-started" class="hash-link" aria-label="Direct link to Get Started" title="Direct link to Get Started">​</a></h2>
+<p>LittleHorse is free for production use according to the Server-Side Public License!</p>
+<p>To get started with LittleHorse OSS, you can:</p>
+<ul>
+<li>Try our <a href="https://littlehorse.dev/docs/developer-guide/install" target="_blank" rel="noopener noreferrer">quickstarts</a></li>
+<li>Visit us on <a href="https://github.com/littlehorse-enterprises/littlehorse" target="_blank" rel="noopener noreferrer">GitHub</a> and give us a <!-- -->⭐<!-- -->!</li>
+<li>Download our <a href="https://gallery.ecr.aws/littlehorse" target="_blank" rel="noopener noreferrer">docker images</a></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h2>
+<p>We'd like to highlight some of the exciting new features in <code>0.5.0</code>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="python-wfspec-support">Python <code>WfSpec</code> Support<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#python-wfspec-support" class="hash-link" aria-label="Direct link to python-wfspec-support" title="Direct link to python-wfspec-support">​</a></h3>
+<p>Our Python SDK now has full support for building <code>WfSpec</code>s! You can check it out at our <a href="https://littlehorse.dev/docs/developer-guide/install">quickstart page</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-each-suppport">For-Each Suppport<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#for-each-suppport" class="hash-link" aria-label="Direct link to For-Each Suppport" title="Direct link to For-Each Suppport">​</a></h3>
+<p>This is a very exciting feature which allows you to iterate over a list and spawn multiple <code>ThreadRun</code>s (like threads in a program).</p>
+<p>To see it in action, check out our <a href="https://github.com/littlehorse-enterprises/littlehorse/tree/master/examples/spawn-thread-foreach" target="_blank" rel="noopener noreferrer">example</a> or read the <a href="https://littlehorse.dev/docs/developer-guide/wfspec-development/child-threads" target="_blank" rel="noopener noreferrer">documentation</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="improved-failure-handling">Improved Failure Handling<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#improved-failure-handling" class="hash-link" aria-label="Direct link to Improved Failure Handling" title="Direct link to Improved Failure Handling">​</a></h3>
+<p>This release introduces a new status for LittleHorse, called <code>EXCEPTION</code>. The <code>EXCEPTION</code> status differs from the <code>ERROR</code> status in the following ways:</p>
+<ul>
+<li><code>ERROR</code> means an unexpected <em>technical</em> failure occurred. For example, a <code>TaskRun</code> timed out because a third-party API was down.</li>
+<li><code>EXCEPTION</code> means that a failure occurred at the <em>business process level</em>. For example, you might use an <code>EXCEPTION</code> when a customer has insufficient funds in her account to complete an order.</li>
+</ul>
+<p>Just like in programming, you can throw and catch <code>EXCEPTION</code>s (and you can also catch <code>ERROR</code>s). For a blog post that goes in-depth into how LittleHorse makes it easy to handle failures in your workflows, check out our <a href="https://littlehorse.dev/docs/concepts/exception-handling">Failure Handling Docs</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lh-server-monitoring">LH Server Monitoring<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#lh-server-monitoring" class="hash-link" aria-label="Direct link to LH Server Monitoring" title="Direct link to LH Server Monitoring">​</a></h3>
+<p>We added a new path <code>/status</code> on the LH Server's health endpoint (port <code>1822</code> by default) which can be used to inspect the status of all internal Kafka Streams <code>Task</code>s on the LH Server. It presents the following information:</p>
+<ul>
+<li>All Active Tasks on the host</li>
+<li>All Standby Tasks on the host</li>
+<li>Any ongoing State Restorations on the host</li>
+</ul>
+<p>Additionally, we added a <code>/diskUsage</code> endpoint which returns the number of bytes of disk space in use by the LH Server.</p>
+<p>LittleHorse Platform uses these endpoints to intelligently scale, manage, and operate LittleHorse for you.</p>
+<p>We are also in the process of writing and implementing a Kafka Improvement Proposal to improve visibility of Standby Tasks, which will allow the LittleHorse Operator (both in LH Platform and LH Cloud) to safely and smoothly scale LittleHorse clusters down without any downtime. Stay tuned in the Kafka developer mailing list!</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lh-platform">LH Platform<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#lh-platform" class="hash-link" aria-label="Direct link to LH Platform" title="Direct link to LH Platform">​</a></h3>
+<p>LittleHorse Platform is a Kubernetes Operator that securely manages a LittleHorse cluster for you in your own environment. It seamlessly integrates with your Kubernetes environmnent, GitOps workflows, and security strategy (TLS, mTLS, OAuth, Cert Manager, Keycloak).</p>
+<p>LittleHorse Platform is now available for limited early access, and has been installed in one of the largest health insurance companies in the US.</p>
+<p>To get started with LittleHorse Platform, please <a href="https://docs.google.com/forms/d/e/1FAIpQLScXVvTYy4LQnYoFoRKRQ7ppuxe0KgncsDukvm96qKN0pU5TnQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">contact us</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="persistent-variables">Persistent Variables<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#persistent-variables" class="hash-link" aria-label="Direct link to Persistent Variables" title="Direct link to Persistent Variables">​</a></h3>
+<p>In LittleHorse <code>0.2.0</code> and later, you can search for <code>Variable</code>s by their value. For example, if you have a Workflow Specification that defines a variable <code>email_address</code>, you can find all Workflow Run's where <code>email_address == 'obiwan@jedi-council.org</code>  by using the <code>SearchVariable</code> rpc call.</p>
+<p>The problem with <code>0.2.0</code>? You need to provide the <code>wfSpecVersion</code> in your search request. That means you can only search for a <code>Variable</code> if you know the version of the <code>WfSpec</code> it came from.</p>
+<p>Release <code>0.4.0</code> introduced the ability to mark a <code>Variable</code> as <code>persistent</code>, which means that:</p>
+<ul>
+<li>Every future version of the <code>WfSpec</code> must have the same variable definition with the same index type.</li>
+<li>You can now search for variables with a certain value across <em>all versions</em> of the <code>WfSpec</code>.</li>
+</ul>
+<p>Be on the lookout for an upcoming blog post about using Persistent Variables and a simple backend-for-frontend to build an end-to-end Approval Workflow Application using only LittleHorse!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-next">What's Next<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#whats-next" class="hash-link" aria-label="Direct link to What's Next" title="Direct link to What's Next">​</a></h2>
+<p>Over the next few weeks, we plan to:</p>
+<ul>
+<li>Add utilities to make it easier to work with the LittleHorse API.</li>
+<li>Allow users to throw a Workflow <code>EXCEPTION</code> from within the Task Worker SDK (currently, only <code>ERROR</code> is supported).</li>
+<li>Continue hardening the LittleHorse Server's availability and performance story.</li>
+<li>Launch limited early accesss for LittleHorse Cloud and LittleHorse UI.</li>
+</ul>
+<p>To get started with LittleHorse, head over to our <a href="https://littlehorse.dev/docs/developer-guide/install" target="_blank" rel="noopener noreferrer">installation docs</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="what-about-030-and-040">What about <code>0.3.0</code> and <code>0.4.0</code>?<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#what-about-030-and-040" class="hash-link" aria-label="Direct link to what-about-030-and-040" title="Direct link to what-about-030-and-040">​</a></h3>
+<p>We also released <code>0.3.0</code> and <code>0.4.0</code> over the past 5 weeks! (And before <code>0.3.0</code>, we had a minor patch bugfix on <code>0.2.1</code>).</p>
+<p>The only thing missing with <code>0.3.0</code> and <code>0.4.0</code> is a blog post + announcement. That's because a lot of the features we included in this announcement were partially-implemented, implemented in some languages and not others, or in the "experimental" phase at the time of <code>0.3.0</code> and <code>0.4.0</code>. We accelerated the release of <code>0.3.0</code> and <code>0.4.0</code> because certain early-access customers requested certain features on an accelerated timeline.</p>
+<p>As our API is mostly stable now, we will slow down our release cadence to likely a new <code>*.x.*</code> version (a <code>minor</code> release in <a href="https://semver.org/" target="_blank" rel="noopener noreferrer">Semantic Versioning</a>) every two months, with security and bugfix patch releases (<code>*.*.x</code>) as needed.</p>
+<p>Additionally, as we introduce new features, we will start a release changelog document in which we document the level of stability of the new API's introduced. For example:</p>
+<ul>
+<li><code>STABLE</code>: Any changes to this API before the next <a href="https://semver.org/" target="_blank" rel="noopener noreferrer">Major Release</a> will be backwards compatible. The feature is covered by our integration tests.</li>
+<li><code>BETA</code>: We don't anticipate any <em>large breaking changes</em> to the feature/API. It is covered by our integration tests, but it <em>might</em> change before the <code>1.0.0</code> release.</li>
+<li><code>EXPERIMENTAL</code>: Try it out and give us feedback! But you might want to wait a release or two before putting it into production.</li>
+</ul>
+<p>The <code>0.6.0</code> release notes will include a table of all of our features and their API Stability Level in all four of our SDK's.</p>]]></content:encoded>
+            <category>littlehorse</category>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Helm and Kubernetes Operators]]></title>
+            <link>https://littlehorse.dev/blog/helm-and-k8s-operators</link>
+            <guid>https://littlehorse.dev/blog/helm-and-k8s-operators</guid>
+            <pubDate>Fri, 01 Sep 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[To Helm or to Operator?]]></description>
+            <content:encoded><![CDATA[<p>About <a href="https://helm.sh/" target="_blank" rel="noopener noreferrer">Helm</a> vs Kubernetes Operators.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm">Helm<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#helm" class="hash-link" aria-label="Direct link to Helm" title="Direct link to Helm">​</a></h2>
+<p>Helm is like <code>brew</code> or <code>npm</code> for Kubernetes. There are repositories containing charts, and each chart allows you to install an application into your K8s cluster.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="how-it-works">How it Works<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#how-it-works" class="hash-link" aria-label="Direct link to How it Works" title="Direct link to How it Works">​</a></h3>
+<p>Under the hood, Helm works by filling out some templated Kubernetes yaml files with user-provided values, drastically reducing boilerplate and allowing you to deploy a reasonably complex application without the user of the helm chart having to understand too much about how to manage such an application.</p>
+<p>In addition to that template-engine functionality, Helm also manages versions of your application. You can use Helm to release a new version of your app (for example, updating the docker image tag) and then quickly roll back to a previous version if you discover a bug. This is great for teams deploying stateless applications such as microservices or <a href="https://littlehorse.dev/docs/concepts/task-workers" target="_blank" rel="noopener noreferrer">LittleHorse Task Workers</a>.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-good">The Good<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#the-good" class="hash-link" aria-label="Direct link to The Good" title="Direct link to The Good">​</a></h3>
+<p>First, it is quite simple to write a Helm chart. This means that most DevOps teams can quickly write a helm chart that can be used by microservice teams across their organization.</p>
+<p>Secondly, Helm is a client library (well, it has been since the removal of Tiller...but that's another blog post). Therefore, you don't need to run any privileged pods inside the K8s cluster; all you need is a CI server with permissiosn to create the necessary K8s resources.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="limitations">Limitations<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#limitations" class="hash-link" aria-label="Direct link to Limitations" title="Direct link to Limitations">​</a></h3>
+<p>Unfortunately, Helm doesn't do much beyond initial installation and upgrades. Monitoring, self-healing, autoscaling, certificate rotation, and management of non-Kubernetes resources (eg. Kafka Topics, LittleHorse Task Definitions, AWS LoadBalancers, etc) are some exercises left to the reader, to name just a few.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="operators">Operators<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#operators" class="hash-link" aria-label="Direct link to Operators" title="Direct link to Operators">​</a></h2>
+<p><a href="https://operatorframework.io/" target="_blank" rel="noopener noreferrer">Kubernetes Operators</a> are a pattern introduced by Red Hat that intends to capture the knowledge of an expert Site Reliability Engineer (or, more punnily, a software operator) into a program that manages (or operates) a complex application.</p>
+<p>To accomplish this, a Kubernetes Operator <em>extends</em> the Kubernetes API to introduce a new resource type that is custom-made for your application. The Operator works in tandem with Kubernetes itself to manage applications of a specific type.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="how-they-work">How they Work<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#how-they-work" class="hash-link" aria-label="Direct link to How they Work" title="Direct link to How they Work">​</a></h3>
+<p>A Kubernetes Operator has two components:</p>
+<ol>
+<li>A <code>CustomResourceDefinition</code>, which defines the extension to the Kubernetes API (including relevant configurations for your application type).</li>
+<li>A Controller, which watches any resources from your Custom Resource Definition and "reconciles" them.</li>
+</ol>
+<p>The <code>CustomResourceDefinition</code> can be over-simplified as an Open API (not Open AI) specification for how your custom resource will look. For example, in LittleHorse Platform, the simplest version of a <code>LHCluster</code> resource (which creates a, you guessed it, LittleHorse Cluster) is:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">apiVersion</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> littlehorse.io/v1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">kind</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> LHCluster</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">metadata</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> hello</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">littlehorse</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">namespace</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> lh</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">spec</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">server</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"0.2.0"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">listeners</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> internal</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">k8s</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">type</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> internal</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">port</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2023</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">replicas</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">3</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">storage</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">volumeSize</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"10G"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">kafka</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">strimziClusterRef</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">clusterName</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> my</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">strimzi</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">kafka</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">cluster</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">listenerPort</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">9093</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>The <code>CustomResourceDefinition</code> allows you to <code>kubectl apply -f &lt;that file up there&gt;</code>, and then you can <code>kubectl get lhclusters</code>:</p>
+<p>Now how does the LittleHorse cluster get created, configured, managed, and monitored? That's where the Controller comes into play. In the Operator pattern, a Controller is a process (normally, it runs as a <code>Pod</code> in a cluster) that watches for all events related to a <code>CustomResourceDefinition</code> and manipulates the external world to match what the Custom Resources specify.</p>
+<p>Generally, that means creating a bunch of Kubernetes <code>Service</code>s, <code>Deployment</code>s, etc. to spin up an instance of an application. For example, the <a href="https://strimzi.io/" target="_blank" rel="noopener noreferrer">Strimzi</a> Kafka Operator watches <code>Kafka</code> resources and deploys an actual Kafka cluster.</p>
+<p>However, a Controller can also manage non-kuberentes resources. For example, many <code>Ingress</code> controllers provision or configure physical load balancers outside of the Kubernetes cluster. As another great example, the <a href="https://strimzi.io/" target="_blank" rel="noopener noreferrer">Strimzi</a> Kafka Topic Operator watches for <code>KafkaTopic</code> resources and creates (you guessed it) Kafka Topics using the Kafa Admin API.</p>
+<p>We at LittleHorse plan to add similar CRD's that are specific to LittleHorse...stay tuned to learn about the <code>LHTaskDef</code> and <code>LHPrincipal</code> CRD's <!-- -->😉<!-- -->.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-good-1">The Good<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#the-good-1" class="hash-link" aria-label="Direct link to The Good" title="Direct link to The Good">​</a></h3>
+<p>Kubernetes Operators are beautiful. Since they were developed by Red Hat, they (along with <a href="https://strimzi.io/" target="_blank" rel="noopener noreferrer">Strimzi</a>) are the biggest reason why Red Hat is in my top-three favorite software companies of all time.</p>
+<p>A well-written operator can make it a breeze to manage even the most daunting applications. Since the Controller is code written in a general-purpose language (normally Go or Java), an Operator can do just about anything that can be automated by an SRE. This includes:</p>
+<ul>
+<li>Autoscaling and alerting based on metrics</li>
+<li>Self-healing and mitigation in the face of hardware faults or degradations</li>
+<li>Certificate rotation</li>
+<li>Metadata management in your application (for example, creating Kafka Users)</li>
+<li>Intelligent rolling restarts that preserve high availability</li>
+<li>Provisioning infrastructure <em>outside of</em> Kubernetes, for example <a href="https://crossplane.io/" target="_blank" rel="noopener noreferrer">CrossPlane</a>.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-ugly">The Ugly<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#the-ugly" class="hash-link" aria-label="Direct link to The Ugly" title="Direct link to The Ugly">​</a></h3>
+<p>The biggest downside to Operators in Kubernetes is that writing a Controller is <em>hard</em>. Additionally, it requires running a <code>Pod</code> with special privileges that allow the <code>Pod</code> to create other K8s resources. Because of this, writing an Operator for something like standardizing your team's blueprints for deploying a microservice just doesn't make sense.</p>
+<p>Future blogs will dive into some of the challenges that we had to overcome with LittleHorse Platform, and how we minimized the permissions that our Operator needs to provide a self-driving LittleHorse experience to our customers.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-or-operators">Helm or Operators?<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#helm-or-operators" class="hash-link" aria-label="Direct link to Helm or Operators?" title="Direct link to Helm or Operators?">​</a></h2>
+<p>Well, I'm a software engineer, so I'm going to say "it depends." However, Kafka legend Gwen Shapira said in a fantastic <a href="https://open.spotify.com/episode/0BYwF3e8y5OzrPt0xYMyqb?si=0c7d44154b434d0e" target="_blank" rel="noopener noreferrer">podcast</a> that some "it depends" are more helpful than others. So in an effort to fall in the "more helpful" side:</p>
+<ul>
+<li>If you want a framework for deploying simple stateless applications while minimizing boilerplate (i.e. allowing different teams to deploy microservices), then you probably want Helm.</li>
+<li>If your application doesn't require much hand-holding after initial configuration on Kubernetes, Helm might do.</li>
+<li>If you want to provide a Kubernetes-native way to manage non-kubernetes infrastructure, you need an Operator.</li>
+<li>If you want to provide a self-driving experience for consumers of a highly complex application such as Kafka, ElasticSearch, or LittleHorse, you need an Operator.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="littlehorse-platform">LittleHorse Platform<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#littlehorse-platform" class="hash-link" aria-label="Direct link to LittleHorse Platform" title="Direct link to LittleHorse Platform">​</a></h3>
+<p>LittleHorse Platform is an enterprise-ready distribution of LittleHorse that runs in your own Kubernetes environment. We believe that Helm is fantastic for deploying many stateless applications, and even some stateful applications. However, Helm wouldn't let us go far enough towards providing our customers with a fully self-driving LittleHorse experience. As such, we chose to put in the extra work and build a full Kubernetes Operator. Stay tuned for an extensive list of current and upcoming LH Platform features, all powered by the <a href="https://javaoperatorsdk.io/" target="_blank" rel="noopener noreferrer">Java Operator SDK</a>.</p>
+<p>To inquire about LittleHorse Platform, contact <code>sales@littlehorse.io</code>. To get started with LittleHorse Community (free for production use under the SSPL), check out our <a href="https://littlehorse.dev/docs/developer-guide/install" target="_blank" rel="noopener noreferrer">Installation Docs</a>.</p>]]></content:encoded>
+            <category>friday-tech-tips</category>
+            <category>kubernetes</category>
+        </item>
+        <item>
+            <title><![CDATA[Releasing 0.2.0]]></title>
+            <link>https://littlehorse.dev/blog/littlehorse-0.2.0-release</link>
+            <guid>https://littlehorse.dev/blog/littlehorse-0.2.0-release</guid>
+            <pubDate>Wed, 30 Aug 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Making workflow development easy again.]]></description>
+            <content:encoded><![CDATA[<p>We are excited to announce the release of <code>0.2.0</code>!  In this release, we added several new features, highlighted by User Tasks, security, and Python support.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="get-started">Get Started<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#get-started" class="hash-link" aria-label="Direct link to Get Started" title="Direct link to Get Started">​</a></h2>
+<p>LittleHorse is free for production use according to the Server-Side Public License!</p>
+<p>To get started with LittleHorse OSS, you can:</p>
+<ul>
+<li>Visit us on <a href="https://github.com/littlehorse-enterprises" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+<li>Try our <a href="https://littlehorse.dev/docs/developer-guide/install#installation-and-quickstart" target="_blank" rel="noopener noreferrer">quickstarts</a></li>
+</ul>
+<p>Additionally, with version <code>0.2.0</code>, we have released our first two Docker Images:</p>
+<ul>
+<li><a href="https://gallery.ecr.aws/littlehorse/littlehorse-server" target="_blank" rel="noopener noreferrer"><code>lh-server</code></a>, the production-ready build of the LittleHorse Server.</li>
+<li><a href="https://gallery.ecr.aws/littlehorse/littlehorse-standalone" target="_blank" rel="noopener noreferrer"><code>lh-standalone</code></a>, a self-contained build of the LittleHorse Server that you can run to get a working LH Installation for local development.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h2>
+<p>Release <code>0.2.0</code> contains many exciting new features, and we've highlighted a few here.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="user-tasks">User Tasks<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#user-tasks" class="hash-link" aria-label="Direct link to User Tasks" title="Direct link to User Tasks">​</a></h3>
+<p><a href="https://littlehorse.dev/docs/concepts/user-tasks" target="_blank" rel="noopener noreferrer">User Tasks</a> are a massive new feature released in <code>0.2.0</code> which allow you to schedule tasks to be executed by a human user alongside tasks that are executed by computers.</p>
+<p>In <code>0.2.0</code>, User Tasks have reached stability, meaning that future releases will be backwards-compatible with the current User Tasks API. We currently have the following features:</p>
+<ul>
+<li>Assignment of tasks to a User or User Group</li>
+<li>Reminder Tasks, or <code>TaskRun</code>'s that are scheduled some time after a <code>UserTaskRun</code> is scheduled.</li>
+<li>Automatic reassignment of a <code>UserTaskRun</code> after some period of inactivity.</li>
+<li>Manual reassignment of a <code>UserTaskRun</code>.</li>
+<li><code>UserTaskRun</code> search.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>The public API for User Tasks is stable in all of the grpc clients and in the Java <code>WfSpec</code> SDK.</p><p>The Go and Python grpc clients both support User Tasks. However, neither Python nor Go yet have support for User Tasks in the <code>WfSpec</code> SDK.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="workflow-threading">Workflow Threading<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#workflow-threading" class="hash-link" aria-label="Direct link to Workflow Threading" title="Direct link to Workflow Threading">​</a></h3>
+<p>Release <code>0.2.0</code> allows you to use a <code>WAIT_FOR_THREADS</code> node to wait for more than one child thread at one time. For an example, see our <a href="https://github.com/littlehorse-enterprises/littlehorse/tree/master/examples/parallel-approval" target="_blank" rel="noopener noreferrer">Parallel Approval Example</a> on our GitHub.</p>
+<p>Future releases will provide <em>backwards-compatible</em> enhancements to this
+functionality, allowing various strategies for handling failures of individual child threads.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="python-support">Python Support<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#python-support" class="hash-link" aria-label="Direct link to Python Support" title="Direct link to Python Support">​</a></h3>
+<p>We have released an alpha <a href="https://github.com/littlehorse-enterprises/littlehorse/tree/master/sdk-python" target="_blank" rel="noopener noreferrer">Python SDK</a>! This release contains:</p>
+<ul>
+<li>Python client in grpc</li>
+<li>Python Task Worker SDK</li>
+</ul>
+<p>Currently, building <code>WfSpec</code>'s in Python is not supported. We aim to move python Task Worker support from alpha to beta, and add alpha support for <code>WfSpec</code> development in python, in the <code>0.3.0</code> release.</p>
+<p>To try out our python task worker client, you can head to <a href="https://littlehorse.dev/docs/developer-guide/install" target="_blank" rel="noopener noreferrer">Installation Docs</a> and the <a href="https://littlehorse.dev/docs/developer-guide/task-worker-development" target="_blank" rel="noopener noreferrer">Task Worker Development Docs</a>.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>The Python SDK is in the alpha stage, meaning that future releases could break backwards compatibility.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="security">Security<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#security" class="hash-link" aria-label="Direct link to Security" title="Direct link to Security">​</a></h3>
+<p>We added beta support for OAuth, TLS, and mTLS in release <code>0.2.0</code>. The following features graduated to "beta" in this release:</p>
+<ul>
+<li>TLS encryption for incoming connections on all listeners, configured on a per-listener basis.</li>
+<li>mTLS to authenticate incoming connections on any listeners, configured on a per-listener basis.</li>
+<li>OAuth to authenticate incoming connections on any public listener (excluding the inter-server communication port).</li>
+</ul>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Beta support means that we will soon add significant functionality, and as such a future release <em>might</em> break backwards compatibility.</p><p>However, future releases of a feature in the <em>beta</em> state will most likely be backwards compatible with <code>0.2.0</code> barring exceptional circumstances.</p></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="performance">Performance<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#performance" class="hash-link" aria-label="Direct link to Performance" title="Direct link to Performance">​</a></h3>
+<p>We made several optimizations to our storage management sub-system, reducing the number of put's and get's into our backing state store by roughly 30%. As a result, a LittleHorse Server running with a single partition is capable of scheduling over 1,100 <code>TaskRun</code>'s per second.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="go-support">Go Support<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#go-support" class="hash-link" aria-label="Direct link to Go Support" title="Direct link to Go Support">​</a></h3>
+<p>Support for the Go client is now beta. Future releases will maintain compatibility for all features on our documentation.</p>
+<p>Release <code>0.3.0</code> will close the gap between the Java and Go SDK's, adding features such as:</p>
+<ul>
+<li>Format Strings for Variable Assignments in the <code>WfSpec</code> SDK</li>
+<li>User Task support in the <code>WfSpec</code> SDK</li>
+<li>Configuring Indexes on <code>Variable</code>s in the <code>WfSpec</code> SDK</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-next">What's Next<a href="https://littlehorse.dev/blog/littlehorse-0.2.0-release#whats-next" class="hash-link" aria-label="Direct link to What's Next" title="Direct link to What's Next">​</a></h2>
+<p>We have several exciting features coming soon over the next few releases, including:</p>
+<ul>
+<li>Fine-grained access controls</li>
+<li>Backward-compatible improvements to <a href="https://littlehorse.dev/docs/concepts/exception-handling" target="_blank" rel="noopener noreferrer">Failure Handling</a></li>
+<li>C# support</li>
+<li>Python support for building <code>WfSpec</code>s</li>
+</ul>
+<p>For an enterprise-ready distribution of LittleHorse running in your own datacenter, contact <code>sales@littlehorse.io</code> to inquire about LittleHorse Platform.</p>
+<p>For a pay-as-you-go, serverless Managed Service of LittleHorse in the cloud, fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLScXVvTYy4LQnYoFoRKRQ7ppuxe0KgncsDukvm96qKN0pU5TnQ/viewform" target="_blank" rel="noopener noreferrer">LH Cloud Waitlist Form</a>.</p>]]></content:encoded>
+            <category>littlehorse</category>
+            <category>release</category>
+        </item>
+    </channel>
+</rss>
