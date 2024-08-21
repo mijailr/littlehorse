@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://littlehorse.dev/blog</id>
-    <title>LittleHorse Blog</title>
+    <title>LittleHorse Orchestrator Blog</title>
     <updated>2024-01-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://littlehorse.dev/blog"/>
-    <subtitle>LittleHorse Blog</subtitle>
+    <subtitle>LittleHorse Orchestrator Blog</subtitle>
     <icon>https://littlehorse.dev/img/logo.jpg</icon>
     <entry>
         <title type="html"><![CDATA[Releasing 0.7]]></title>
@@ -96,7 +96,7 @@
 <li><code>ERROR</code> means an unexpected <em>technical</em> failure occurred. For example, a <code>TaskRun</code> timed out because a third-party API was down.</li>
 <li><code>EXCEPTION</code> means that a failure occurred at the <em>business process level</em>. For example, you might use an <code>EXCEPTION</code> when a customer has insufficient funds in her account to complete an order.</li>
 </ul>
-<p>Just like in programming, you can throw and catch <code>EXCEPTION</code>s (and you can also catch <code>ERROR</code>s). For a blog post that goes in-depth into how LittleHorse makes it easy to handle failures in your workflows, check out our <a href="https://littlehorse.dev/docs/concepts/exception-handling">Failure Handling Docs</a>.</p>
+<p>Just like in programming, you can throw and catch <code>EXCEPTION</code>s (and you can also catch <code>ERROR</code>s). For a blog post that goes in-depth into how LittleHorse makes it easy to handle failures in your workflows, check out our <a href="https://littlehorse.dev/docs/concepts/workflows#failure-handling">Failure Handling Docs</a>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="lh-server-monitoring">LH Server Monitoring<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#lh-server-monitoring" class="hash-link" aria-label="Direct link to LH Server Monitoring" title="Direct link to LH Server Monitoring">​</a></h3>
 <p>We added a new path <code>/status</code> on the LH Server's health endpoint (port <code>1822</code> by default) which can be used to inspect the status of all internal Kafka Streams <code>Task</code>s on the LH Server. It presents the following information:</p>
 <ul>
@@ -108,7 +108,7 @@
 <p>LittleHorse Platform uses these endpoints to intelligently scale, manage, and operate LittleHorse for you.</p>
 <p>We are also in the process of writing and implementing a Kafka Improvement Proposal to improve visibility of Standby Tasks, which will allow the LittleHorse Operator (both in LH Platform and LH Cloud) to safely and smoothly scale LittleHorse clusters down without any downtime. Stay tuned in the Kafka developer mailing list!</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="lh-platform">LH Platform<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#lh-platform" class="hash-link" aria-label="Direct link to LH Platform" title="Direct link to LH Platform">​</a></h3>
-<p>LittleHorse Platform is a Kubernetes Operator that securely manages a LittleHorse cluster for you in your own environment. It seamlessly integrates with your Kubernetes environmnent, GitOps workflows, and security strategy (TLS, mTLS, OAuth, Cert Manager, Keycloak).</p>
+<p>LittleHorse Platform is a Kubernetes Operator that securely manages a LittleHorse cluster for you in your own environment. It seamlessly integrates with your Kubernetes environment, GitOps workflows, and security strategy (TLS, mTLS, OAuth, Cert Manager, Keycloak).</p>
 <p>LittleHorse Platform is now available for limited early access, and has been installed in one of the largest health insurance companies in the US.</p>
 <p>To get started with LittleHorse Platform, please <a href="https://docs.google.com/forms/d/e/1FAIpQLScXVvTYy4LQnYoFoRKRQ7ppuxe0KgncsDukvm96qKN0pU5TnQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">contact us</a>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="persistent-variables">Persistent Variables<a href="https://littlehorse.dev/blog/littlehorse-0.5.0-release#persistent-variables" class="hash-link" aria-label="Direct link to Persistent Variables" title="Direct link to Persistent Variables">​</a></h3>
@@ -160,7 +160,7 @@
 <p>In addition to that template-engine functionality, Helm also manages versions of your application. You can use Helm to release a new version of your app (for example, updating the docker image tag) and then quickly roll back to a previous version if you discover a bug. This is great for teams deploying stateless applications such as microservices or <a href="https://littlehorse.dev/docs/concepts/task-workers" target="_blank" rel="noopener noreferrer">LittleHorse Task Workers</a>.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="the-good">The Good<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#the-good" class="hash-link" aria-label="Direct link to The Good" title="Direct link to The Good">​</a></h3>
 <p>First, it is quite simple to write a Helm chart. This means that most DevOps teams can quickly write a helm chart that can be used by microservice teams across their organization.</p>
-<p>Secondly, Helm is a client library (well, it has been since the removal of Tiller...but that's another blog post). Therefore, you don't need to run any privileged pods inside the K8s cluster; all you need is a CI server with permissiosn to create the necessary K8s resources.</p>
+<p>Secondly, Helm is a client library (well, it has been since the removal of Tiller...but that's another blog post). Therefore, you don't need to run any privileged pods inside the K8s cluster; all you need is a CI server with permission to create the necessary K8s resources.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="limitations">Limitations<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#limitations" class="hash-link" aria-label="Direct link to Limitations" title="Direct link to Limitations">​</a></h3>
 <p>Unfortunately, Helm doesn't do much beyond initial installation and upgrades. Monitoring, self-healing, autoscaling, certificate rotation, and management of non-Kubernetes resources (eg. Kafka Topics, LittleHorse Task Definitions, AWS LoadBalancers, etc) are some exercises left to the reader, to name just a few.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="operators">Operators<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#operators" class="hash-link" aria-label="Direct link to Operators" title="Direct link to Operators">​</a></h2>
