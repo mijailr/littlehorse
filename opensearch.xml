@@ -4,7 +4,7 @@
   <ShortName>LittleHorse Orchestrator</ShortName>
   <Description>Search LittleHorse Orchestrator</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://littlehorse.dev/img/logo.jpg</Image>
+  <Image width="16" height="16" type="image/x-icon">https://littlehorse.dev/img/logo.png</Image>
   <Url type="text/html" method="get" template="https://littlehorse.dev/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://littlehorse.dev/opensearch.xml" />
   <moz:SearchForm>https://littlehorse.dev/</moz:SearchForm>
