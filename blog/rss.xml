@@ -4,10 +4,80 @@
         <title>LittleHorse Orchestrator Blog</title>
         <link>https://littlehorse.dev/blog</link>
         <description>LittleHorse Orchestrator Blog</description>
-        <lastBuildDate>Sun, 28 Jan 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 22 Aug 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[The Promise of Microservices]]></title>
+            <link>https://littlehorse.dev/blog/promise-of-microservices</link>
+            <guid>https://littlehorse.dev/blog/promise-of-microservices</guid>
+            <pubDate>Thu, 22 Aug 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[<!-- ---]]></description>
+            <content:encoded><![CDATA[<p>If microservices add so much complexity, why bother with the hassle? </p>
+<p>We've all <em>heard of</em> microservices, but unless you've read copious amounts of Sam Newman and Adam Bellemare's writings, you might be wondering whether, when, and why you should adopt them. In this blog post, we will examine the halcyon land promised by microservices.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>This is the first part of a 3-part blog series:</p><ol>
+<li><strong>[This Post]</strong> The Promise of Microservices</li>
+<li><strong>[Coming Soon]</strong> The Challenge with Microservices</li>
+<li><strong>[Coming Soon]</strong> Workflow and Microservices: A Match Made in Heaven</li>
+</ol></div></div>
+<p>Microservices have been <a href="https://www.simform.com/blog/microservices-examples/" target="_blank" rel="noopener noreferrer">deployed widely</a> across many large enterprises, most notably Netflix, Uber, Shopify, PayPal, and others. As we will discover throughout this blog series, a microservice architecture is mandatory once you reach a certain size of company, and it's probably overkill for a 12-person startup. The gray area inbetween is the interesting part!</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-are-microservices">What are Microservices?<a href="https://littlehorse.dev/blog/promise-of-microservices#what-are-microservices" class="hash-link" aria-label="Direct link to What are Microservices?" title="Direct link to What are Microservices?">​</a></h2>
+<p>The term "microservices" refers to a software architecture wherein an enterprise application comprises a collection of small, loosely coupled, and independently deployable services (these small services are called "microservices" in contrast to larger monoliths). Each microservice focuses on a specific business capability and communicates with other services over a network, typically through API's, streaming platforms, or message queues.</p>
+<p>In practice, this means that a user interaction with an application (such as placing an order) might trigger actions that occur in <em>many</em> small, independently-deployed software systems, such as:</p>
+<ul>
+<li>A Notification service</li>
+<li>An Inventory Management service</li>
+<li>A Payments service</li>
+<li>An Order History service</li>
+</ul>
+<p>From the user (client) perspective, one request is made (generally through a Load Balancer, API Gateway, or Ingress Controller) but that request may ping-pong between multiple back-end services and may also result in future actions being scheduled asynchronously:</p>
+<p><img decoding="async" loading="lazy" alt="Microservices Architecture" src="https://littlehorse.dev/assets/images/2024-08-22-microservices-arch-2389e95f878235ea53f0c0afa2eea967.png" width="861" height="962" class="img_ev3q"></p>
+<p>In contrast to microservices, a <em>monolithic</em> architecture would serve the entire "place order" request on a single deployable artifact:</p>
+<p><img decoding="async" loading="lazy" alt="Monolithic Architecture" src="https://littlehorse.dev/assets/images/2024-08-22-monolith-arch-894351f807fd64060d9d05380fc799cf.png" width="250" height="499" class="img_ev3q"></p>
+<p>In Domain Driven Design, accidental complexity refers to the unintentional complexity that you introduced to your architecture (deployments, service interactions, third-party dependencies, etc.). Rule #1 of maintaining software systems is to avoid introducing accidental complexity as much as possible.</p>
+<p>Simply by looking at the visuals above, microservices add a significant dose of accidental complexity to your architecture (more on this in next week's post!). Given that, what benefits would make up for the extra complexity introduced by microservices?</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-now">Why Now?<a href="https://littlehorse.dev/blog/promise-of-microservices#why-now" class="hash-link" aria-label="Direct link to Why Now?" title="Direct link to Why Now?">​</a></h2>
+<p>I would be first to admit that microservices bring with them a series of headaches around cost, observability, maintenance, and ease of evolution (otherwise, I would not have founded LittleHorse Enterprises!). However, microservice architecture plays a vital role in addressing two critical trends reshaping the software development landscape today:</p>
+<ul>
+<li>Increased digitization of companies in all business sectors (accelerated by the rise of AI).</li>
+<li>Elasticity of cloud computing.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="increased-digitization">Increased Digitization<a href="https://littlehorse.dev/blog/promise-of-microservices#increased-digitization" class="hash-link" aria-label="Direct link to Increased Digitization" title="Direct link to Increased Digitization">​</a></h3>
+<p>The level of digitization expected of businesses in order to compete in the modern market has drastically increased: IT teams must build software that interfaces with an ever-expanding list of external API's, legacy systems, user interfaces, internal tools, and SaaS providers.</p>
+<p>For example: in the early 2000's, it was perfectly acceptable (even <em>expected</em>) for a passenger to book airline tickets over the telephone or through a travel agency. However, such an experience would be unheard of today and would immediately hobble an airline who provided such poor digital services.</p>
+<p>In addition to using automation to provide better customer services, companies are generating, processing, and analyzing massive amounts of data. For example, grocery stores with razor-thin margins analyze seasonal consumption patterns in order to optimize inventory and prevent costly food waste.</p>
+<p>These trends have coincided with (or <em>caused</em>, I would argue) a proliferation in the number of 1) software developers, and 2) software tools and API's found within companies in all industries, leading to two new problems:</p>
+<ol>
+<li>Allowing large teams of software developers to productively work on an enterprise application in parallel (without stepping on each others' toes).</li>
+<li>Ensuring that business requirements are effectively communicated to the entire (larger) software engineering team.</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cloud-elasticity">Cloud Elasticity<a href="https://littlehorse.dev/blog/promise-of-microservices#cloud-elasticity" class="hash-link" aria-label="Direct link to Cloud Elasticity" title="Direct link to Cloud Elasticity">​</a></h3>
+<p>As the importance and quantity of digital software systems exploded over the last two decades, so has the availability of nearly-infinite compute power delivered through cloud infrastructure providers such as AWS.</p>
+<p>The promise of <em>elasticity</em>, or the ability to quickly spin compute resources up or down according to load and only pay for what you use, is unique to the cloud: for on-prem datacenters, spinning up new compute means buying new machines from Sun Microsystems (hopefully not Microsoft!), and scaling down compute means trying to sell them off on the secondary market. (Ask my father about how that went for a lot of people in 2001.)</p>
+<p>Beyond scaling up and down, elasticity enables different deployment patterns that did not exist before. Whereas pre-cloud enterprises had dedicated and centralized data-center teams who were in charge of running applications, the accessibility of cloud computing gave rise to the DevOps movement. This has empowered smaller teams of software developers to take on the task of transferring software from "it works on my laptop!" to "it's now deployed in production!"</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="why-microservices">Why Microservices?<a href="https://littlehorse.dev/blog/promise-of-microservices#why-microservices" class="hash-link" aria-label="Direct link to Why Microservices?" title="Direct link to Why Microservices?">​</a></h2>
+<p>Despite the extra complexity it brings, the microservice architecture can more than pay for itself by ensuring organizational alignment and allowing enterprise architectures to take full advantage of the cloud's elasticity.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="organizational-alignment">Organizational Alignment<a href="https://littlehorse.dev/blog/promise-of-microservices#organizational-alignment" class="hash-link" aria-label="Direct link to Organizational Alignment" title="Direct link to Organizational Alignment">​</a></h3>
+<p>As discussed earlier, the business problems that software engineering organizations must solve today dwarf those that were solved in the 1990's, and so do the software engineering teams that tackle those problems.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>I am not belittling the engineers of the 90's; the problems they solved were arguably <em>much harder</em> than the problems we face today, and there were fewer engineers to face those problems. However, it is a fact that users expect more digital-native experiences today than they did twenty years ago.</p></div></div>
+<p>By breaking applications into smaller services, we can accomplish several important things:</p>
+<ul>
+<li>Break up our software engineering team into smaller teams which are each responsible for individual microservices.</li>
+<li>Allow different components of a system to be developed with separate tech stacks and released independently.</li>
+</ul>
+<p>Engineering teams of over a few dozen engineers working on the same deployable piece of software is a recipe for inefficiency. Merge conflicts, arguments over tech stack, slow "release trains," and excessive intra-team coordination are just a few problems that arise. However, by breaking your application into smaller microservices, you can also break up your engineering organization into smaller, more efficient teams each in charge of a small number (prefably one!) of microservices.</p>
+<p>As an added benefit, properly-designed microservice architectures can follow the principles of Domain Driven Design. Ideally, a single microservice corresponds to a <em>Bounded Context</em> inside the business. This enables a small piece of the technical platform (a microservice) to be managed by a small team of software engineers, who collaborate closely with subject-matter experts and business stakeholders within a very specific domain of the business. Such close collaboration can foster better alignment between business goals and the software produced by engineering teams.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="moving-faster">Moving Faster<a href="https://littlehorse.dev/blog/promise-of-microservices#moving-faster" class="hash-link" aria-label="Direct link to Moving Faster" title="Direct link to Moving Faster">​</a></h3>
+<p>Microservices can allow developers to move faster by enabling continuous delivery and independent deployment of services. In a monolithic architecture, releasing a new feature or fixing a bug typically requires redeploying the entire application. Since microservices allow smaller pieces of your application to be deployed independently, engineering teams can iterate faster and deliver incremental value to business stakeholders.</p>
+<p>These positive effects are amplified by the advent of cloud computing. Since deploying a new application no longer requires buying a physical machine and plugging it into your datacenter but rather just applying a new <code>Deployment</code> and <code>Service</code> on a Kubernetes cluster, it is now truly feasible for small teams of software engineers to own their application stack from laptop-to-production (obviously, within the guardrails set by the central platform team). Furthermore, cloud computing is a pay-as-you-go (and often even pay-for-what-you-use) expense rather than an up-front cost. Therefore, the dollar cost of infrastructure required to support microservices is much lower today than it would have been before the advent of cloud computing and kubernetes.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://littlehorse.dev/blog/promise-of-microservices#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>The microservice architecture is not just a Twitter-driven buzzword but rather a way of designing system that has several real advantages. For most organizations with over two dozen software engineers, building applications with microservices is not an option but rather a <em>necessity</em>. However, those advantages come with a cost.</p>
+<p>We will discuss those challenges in next week's blog post...in the meantime, though, join our <a href="https://launchpass.com/littlehorsecommunity" target="_blank" rel="noopener noreferrer">Community Slack</a> to get the latest updates!</p>]]></content:encoded>
+            <category>tech-trends</category>
+            <category>microservices</category>
+            <category>littlehorse</category>
+        </item>
         <item>
             <title><![CDATA[Releasing 0.7]]></title>
             <link>https://littlehorse.dev/blog/littlehorse-0.7-release</link>
