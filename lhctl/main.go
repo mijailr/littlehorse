@@ -3,7 +3,7 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 */
 package main
 
-import "github.com/littlehorse-enterprises/lhctl/internal"
+import "github.com/littlehorse-enterprises/littlehorse/lhctl/internal"
 
 var (
 	version = "0.0.0-development"
