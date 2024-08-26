@@ -82,6 +82,132 @@
         <category label="littlehorse" term="littlehorse"/>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Releasing 0.9]]></title>
+        <id>https://littlehorse.dev/blog/littlehorse-0.9-release</id>
+        <link href="https://littlehorse.dev/blog/littlehorse-0.9-release"/>
+        <updated>2024-06-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Revamping the LittleHorse Dashboard]]></summary>
+        <content type="html"><![CDATA[<p>The <code>0.9.2</code> release is now availble and ready for use.  The <code>0.9.x</code> releases focused mainly on:</p>
+<ul>
+<li>Improving the user experience on the LittleHorse Dashboard</li>
+<li>Improving the reliability of the LH Server in the face of rebalances and failures.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://littlehorse.dev/blog/littlehorse-0.9-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h2>
+<p>While the majority of the improvements in the <code>0.9</code> release revolve around performance and stability, several of them are highly visible to the user (especially the new dashboard!).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dashboard-rewrite">Dashboard Rewrite<a href="https://littlehorse.dev/blog/littlehorse-0.9-release#dashboard-rewrite" class="hash-link" aria-label="Direct link to Dashboard Rewrite" title="Direct link to Dashboard Rewrite">​</a></h3>
+<p>With help from <a href="https://github.com/diablouma" target="_blank" rel="noopener noreferrer">Nelson Jumbo</a>, LittleHorse Knight <a href="https://github.com/mijailrondon" target="_blank" rel="noopener noreferrer">Mijaíl Rondón</a> rewrote and revamped our administrative dashboard. It now inclues new features such as:</p>
+<ul>
+<li>User Task Detail page</li>
+<li>Improved details on <code>TaskRun</code> progress</li>
+<li>Improved details on <code>WfRun</code> progress</li>
+<li>A plethora of small bug fixes.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="internal-task-queue-optimizations">Internal Task Queue Optimizations<a href="https://littlehorse.dev/blog/littlehorse-0.9-release#internal-task-queue-optimizations" class="hash-link" aria-label="Direct link to Internal Task Queue Optimizations" title="Direct link to Internal Task Queue Optimizations">​</a></h3>
+<p>Deep in the internals of the LittleHorse Server, we implement a Task Queue mechanism to store <code>ScheduledTask</code>s before they're dispatched to the Task Worker clients. This release included many improvements to stability of the Task Queues.</p>
+<p>Most importantly, our Grumpy Maintainer (Eduwer Camacaro) put a cap on the memory consumption of a single <code>TaskDef</code>. Prior to this release, it was possible for poorly-behaved clients to cause an OOM on the server by running millions of workflows which use a <code>TaskDef</code> but not executing the resulting <code>TaskRun</code>s. This would cause an un-bounded buildup of <code>ScheduledTask</code>s in memory until the server crashed.</p>
+<p>After the <code>0.9</code> release, any more than 1,000 <code>ScheduledTask</code>s for a certain <code>TaskDef</code> are not loaded into memory but left on disk.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="principal-deletion">Principal Deletion<a href="https://littlehorse.dev/blog/littlehorse-0.9-release#principal-deletion" class="hash-link" aria-label="Direct link to Principal Deletion" title="Direct link to Principal Deletion">​</a></h3>
+<p>The <code>0.9</code> release includes the ability to delete a <code>Principal</code>. The <code>rpc DeletePrincipal</code> is smart enough to ensure that there is always at least one Admin <code>Principal</code> to prevent a user from locking themselves out of the cluster.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pollthread-in-java-task-worker"><code>PollThread</code> in Java Task Worker<a href="https://littlehorse.dev/blog/littlehorse-0.9-release#pollthread-in-java-task-worker" class="hash-link" aria-label="Direct link to pollthread-in-java-task-worker" title="Direct link to pollthread-in-java-task-worker">​</a></h3>
+<p>We refactored the internal implementation of the Java Task Worker so that, for each LH Server in the cluster, the Task Worker creates a single <code>PollThread</code> object which is responsible for polling and executing <code>TaskRun</code>s. The <code>PollThread</code>s now poll in parallel, drastically increasing the throughput of a single Java Task Worker.</p>
+<p>The <code>PollThread</code> was introduced in <a href="https://github.com/littlehorse-enterprises/littlehorse/pull/796" target="_blank" rel="noopener noreferrer">#796</a>.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-next">What's Next<a href="https://littlehorse.dev/blog/littlehorse-0.9-release#whats-next" class="hash-link" aria-label="Direct link to What's Next" title="Direct link to What's Next">​</a></h2>
+<p>Our wire protocol (the GRPC API) is quite stable; there have been no major breaking changes since we introduced the alpha version of Multi-Tenancy in <code>0.7</code>. We are diligently proceeding through soak tests, load tests, and chaos tests with our server and we have found and addressed several issues.</p>
+<p>We continue to look foward to the <code>1.0</code> release, and we will reach that milestone once:</p>
+<ul>
+<li>We are satisfied with results of load tests and soak tests.</li>
+<li>We have had language experts review each of our three main SDK's (Java, Go, Python) and we have addressed any change requests.</li>
+<li>We approach a year without any breaking changes to our wire protocol.</li>
+</ul>]]></content>
+        <author>
+            <name>The LittleHorse Council</name>
+        </author>
+        <category label="littlehorse" term="littlehorse"/>
+        <category label="release" term="release"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Releasing 0.8]]></title>
+        <id>https://littlehorse.dev/blog/littlehorse-0.8-release</id>
+        <link href="https://littlehorse.dev/blog/littlehorse-0.8-release"/>
+        <updated>2024-03-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Hardening Security]]></summary>
+        <content type="html"><![CDATA[<p>The <code>0.8</code> release of LittleHorse is out! This pre-1.0 release contains many new features, security enhancements, and performance improvements.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h2>
+<p>New features in this release cover some edge-cases in workflow development which came up from some initial pilots and internal usage of the platform.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dynamic-task-execution">Dynamic Task Execution<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#dynamic-task-execution" class="hash-link" aria-label="Direct link to Dynamic Task Execution" title="Direct link to Dynamic Task Execution">​</a></h3>
+<p>Before this release, a <code>TaskNode</code> had a hard-coded reference to a <code>TaskDef</code>. This means that every single <code>WfRun</code> that reaches the same <code>Node</code> in a <code>WfSpec</code> ends up executing the same <code>TaskDef</code>.</p>
+<p>However, in LittleHorse Enterprises LLC's upcoming Control Plane project (a system for dynamically provisioning LittleHorse clusters as a SaaS service), we anticipate a special use-case (which we will blog about this upcoming fall) wherein we need to <em>choose</em> which <code>TaskDef</code> is executed dynamically at runtime.</p>
+<p>Specifically, depending on an input variable to a <code>WfRun</code> (in this case, the <code>data-plane-id</code> variable), we need to execute a different <code>TaskDef</code> so that the <code>TaskRun</code> is executed by a speciific Task Worker in a specific location. We will blog about that use-case later.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="per-thread-failure-handlers">Per-Thread Failure Handlers<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#per-thread-failure-handlers" class="hash-link" aria-label="Direct link to Per-Thread Failure Handlers" title="Direct link to Per-Thread Failure Handlers">​</a></h3>
+<p>Since the <code>0.1.0</code> release of LittleHorse it has been possible to put a <code>FailureHandler</code> on any <code>Node</code>, such that if the <code>NodeRun</code> fails, then a Failure Handler thread is</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="content-in-exceptions">Content in <code>EXCEPTION</code>s<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#content-in-exceptions" class="hash-link" aria-label="Direct link to content-in-exceptions" title="Direct link to content-in-exceptions">​</a></h3>
+<ul>
+<li>#714</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="multi-tenancy-improvements">Multi-Tenancy Improvements<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#multi-tenancy-improvements" class="hash-link" aria-label="Direct link to Multi-Tenancy Improvements" title="Direct link to Multi-Tenancy Improvements">​</a></h3>
+<p>Multi-Tenancy has been quietly under development in the LittleHorse Server since the <code>0.6.0</code> release introduced a breaking change to allow for it last October. The <code>0.8</code> release continues to progress towards making Multi-Tenancy generally-available.</p>
+<p>This release includes two new major features for Multi-Tenancy:</p>
+<ol>
+<li>Allowing Python and Go clients to set the <code>tenant-id</code> header using <code>LHC_TENANT_id</code> (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/704" target="_blank" rel="noopener noreferrer">#704</a>)</li>
+<li>Allowing administrative <code>Principal</code>s with admin privileges over multiple <code>Tenant</code>s: (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/679" target="_blank" rel="noopener noreferrer">#679</a>)</li>
+</ol>
+<p>Multi-Tenancy and support for authentication + fine-grained ACL's via <code>Principal</code>s has been a labor of love implemented by <a href="https://github.com/eduwercamacaro" target="_blank" rel="noopener noreferrer">Eduwer Camacaro</a>, who has grown into the role of Grumpy Maintainer of LittleHorse.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="kafka-security-protocol-support">Kafka Security Protocol Support<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#kafka-security-protocol-support" class="hash-link" aria-label="Direct link to Kafka Security Protocol Support" title="Direct link to Kafka Security Protocol Support">​</a></h3>
+<p>Prior to release <code>0.8</code>, the LH Server could only access a Kafka cluster with either:</p>
+<ul>
+<li>Plaintext access with no security.</li>
+<li>TLS with no authentication.</li>
+<li>MTLS security.</li>
+</ul>
+<p>PR <a href="https://github.com/littlehorse-enterprises/littlehorse/pull/716" target="_blank" rel="noopener noreferrer">#716</a> introduced the following Server configurations:</p>
+<ul>
+<li><code>LHS_KAFKA_SECURITY_PROTOCOL</code></li>
+<li><code>LHS_KAFKA_SASL_MECHANISM</code></li>
+<li><code>LHS_KAFKA_SASL_JAAS_CONFIG</code></li>
+</ul>
+<p>This allows for access to any Kafka cluster except those requiring loading custom implementations of callbacks on the client side (for example, using the Strimzi OAuth Plug-in).</p>
+<p>It is now possible to run LH with Kafka as:</p>
+<ul>
+<li>No security (PLAINTEXT)</li>
+<li>TLS on the brokers, no authentication (SSL)</li>
+<li>MTLS on the brokers (SSL with TRUSTSTORE set)</li>
+<li>SASL with any JAAS config (SASL_SSL)</li>
+<li>Confluent Cloud.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="littlehorse-canary">LittleHorse Canary<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#littlehorse-canary" class="hash-link" aria-label="Direct link to LittleHorse Canary" title="Direct link to LittleHorse Canary">​</a></h3>
+<p>The LittleHorse Canary was released in early access. Inspired by the <a href="https://strimzi.io/blog/2021/11/09/canary/" target="_blank" rel="noopener noreferrer">Strimzi Canary</a> for Apache Kafka, the LittleHorse Canary is a system that runs workflows on LittleHorse and reports on the health of the cluster(s) that it is monitoring.</p>
+<p>The LH Canary system comprises two components:</p>
+<ol>
+<li>The Metronome, which runs workflows and sends metric beats to a Kafka topic.</li>
+<li>The Aggregator, which consumes the metrics beats Kafka topic and aggregates metrics to be exposed to Prometheus and a GRPC API.</li>
+</ol>
+<p>The goal of the Canary is to monitor, profile, and benchmark LittleHorse Clusters from the same exact perspective as the clients who use them.</p>
+<p>The Canary is the brain child of <a href="https://github.com/sauljabin" target="_blank" rel="noopener noreferrer">Saúl Piña</a>, who is also the author of the popular <a href="https://github.com/sauljabin/kaskade" target="_blank" rel="noopener noreferrer">Kaskade</a> TUI for Apache Kafka.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="exponential-backoff-retry-policy">Exponential Backoff Retry Policy<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#exponential-backoff-retry-policy" class="hash-link" aria-label="Direct link to Exponential Backoff Retry Policy" title="Direct link to Exponential Backoff Retry Policy">​</a></h3>
+<p>PR (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/707" target="_blank" rel="noopener noreferrer">#707</a>) introduced the ability to configure exponential backoff for <code>TaskRun</code> retries. Previously, only immediate retries were supported.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="javascript-client">JavaScript Client<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#javascript-client" class="hash-link" aria-label="Direct link to JavaScript Client" title="Direct link to JavaScript Client">​</a></h3>
+<p>We published the first version of <code>littlehorse-client</code> on NPM <a href="https://www.npmjs.com/package/littlehorse-client" target="_blank" rel="noopener noreferrer">here</a>. This client contains the <code>LHConfig</code> in javascript, which provides access to our LittleHorse GRPC API. Note that we do not yet support a JavaScript Task Worker nor a JavaScript <code>WfSpec</code> SDK.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bugfixes">Bugfixes<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#bugfixes" class="hash-link" aria-label="Direct link to Bugfixes" title="Direct link to Bugfixes">​</a></h3>
+<p>In this release, we fixed several bugs:</p>
+<ul>
+<li>Task Worker improperly reported <code>EXCEPTION</code>s and <code>ERROR</code>s when throwing <code>LHTaskException</code> (<a href="https://github.com/littlehorse-enterprises/pull/738" target="_blank" rel="noopener noreferrer">#738</a>)</li>
+<li>Fixes task queue rehydration (<a href="https://github.com/littlehorse-enterprises/pull/727" target="_blank" rel="noopener noreferrer">#727</a>)</li>
+<li>Fixes the Retention Policy for <code>ExternalEventDef</code>'s (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/724" target="_blank" rel="noopener noreferrer">#724</a>)</li>
+<li>Fixes deadlock in Java task worker (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/723" target="_blank" rel="noopener noreferrer">#723</a>)</li>
+<li>Fixes concurrency bug with the <code>AsyncWaiter</code> in the server (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/719" target="_blank" rel="noopener noreferrer">#719</a>)</li>
+<li>Fixes various issues from soak tests (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/706" target="_blank" rel="noopener noreferrer">#706</a>)</li>
+<li>Fixes to <code>NodeRun</code> lifecycle (<a href="https://github.com/littlehorse-enterprises/littlehorse/pull/665" target="_blank" rel="noopener noreferrer">#665</a>).</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="looking-forward">Looking Forward<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#looking-forward" class="hash-link" aria-label="Direct link to Looking Forward" title="Direct link to Looking Forward">​</a></h2>
+<p>We continue to stabilize our API and add features that cover edge cases. Load testing, chaos testing, and soak testing are an ongoing project, and we are working with the Apache Kafka Community on a few bugfixes in the Kafka Streams library which is heavily used in the core of LittleHorse.</p>
+<p>Once those action items are resolved, we will make a <code>1.0</code> release candidate. However, in the meantime we don't expect any massively-breaking API changes at the protocol level. However, certain syntactical changes may occur in our SDK's (especially Go and Python).</p>]]></content>
+        <author>
+            <name>The LittleHorse Council</name>
+        </author>
+        <category label="littlehorse" term="littlehorse"/>
+        <category label="release" term="release"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Releasing 0.7]]></title>
         <id>https://littlehorse.dev/blog/littlehorse-0.7-release</id>
         <link href="https://littlehorse.dev/blog/littlehorse-0.7-release"/>
