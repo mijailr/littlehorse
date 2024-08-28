@@ -4,23 +4,140 @@
         <title>LittleHorse Orchestrator Blog</title>
         <link>https://littlehorse.dev/blog</link>
         <description>LittleHorse Orchestrator Blog</description>
-        <lastBuildDate>Thu, 22 Aug 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 27 Aug 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[The Challenge of Microservices]]></title>
+            <link>https://littlehorse.dev/blog/challenge-of-microservices</link>
+            <guid>https://littlehorse.dev/blog/challenge-of-microservices</guid>
+            <pubDate>Tue, 27 Aug 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Microservices are often necessary, but unfortunately they bring with them some baggage.]]></description>
+            <content:encoded><![CDATA[<p>Microservices are often necessary, but unfortunately they bring with them some baggage. </p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>This is the second part of a 3-part blog series:</p><ol>
+<li><a href="https://littlehorse.dev/blog/promise-of-microservices">The Promise of Microservices</a></li>
+<li><strong>[This Post]</strong> The Challenge with Microservices</li>
+<li><strong>[Coming Soon]</strong> Workflow and Microservices: A Match Made in Heaven</li>
+</ol></div></div>
+<p>Last week, I <a href="https://littlehorse.dev/blog/promise-of-microservices">blogged</a> about the problems that microservices solve, and why they are not only beneficial but necessary in some cases (a good bellwether is the size of your engineering team: beyond 1 or 2 dozen engineers, you will probably start to feel some problems that can be solved with microservices).</p>
+<p>When done correctly, microservices remove several bottlenecks to scaling your business. However, even well-architected microservices bring significant <em>accidental complexity</em>.</p>
+<p>In particular, microservices are:</p>
+<ol>
+<li>Harder to <strong>observe</strong> and debug.</li>
+<li>Harder to make <strong>reliable</strong> in the case of infrastructure or sofware failures.</li>
+<li>More complex to <strong>maintain</strong> and evolve with changing business practices.</li>
+</ol>
+<p>In this article we will explore how the above problems arise from two key facts:</p>
+<ul>
+<li>Microservices are <strong>distributed</strong>.</li>
+<li>Microservices are <strong>choreographed without a leader</strong>.</li>
+</ul>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Microservices bring with them additional challenges around operationalization and deployment. However, those challenges are out-of-scope for this blog post as we instead choose to focus on the challenges faced by <em>application development teams</em> rather than operations teams.</p></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-nature-of-microservices">The Nature of Microservices<a href="https://littlehorse.dev/blog/challenge-of-microservices#the-nature-of-microservices" class="hash-link" aria-label="Direct link to The Nature of Microservices" title="Direct link to The Nature of Microservices">​</a></h2>
+<p>As I described in <a href="https://littlehorse.dev/blog/promise-of-microservices">last week's blog</a>:</p>
+<blockquote>
+<p>The term "microservices" refers to a software architecture wherein an enterprise application comprises a collection of small, loosely coupled, and independently deployable services (these small services are called "microservices" in contrast to larger monoliths). Each microservice focuses on a specific business capability and communicates with other services over a network, typically through API's, streaming platforms, or message queues.</p>
+</blockquote>
+<p>Crucially, a single microservice implements technical logic for a specific domain, or bounded context, within the larger company. In contrast, a comprehensive business process requires interacting with technology and people across <em>many</em> business domains. The classic example of microservices architecture, e-commerce checkout, involves at least <em>shipping</em>, <em>billing</em>, <em>notifications</em>, <em>inventory</em>, and <em>orders</em>.</p>
+<p>In the rest of this blog post we will examine microservices through the the lense of e-commerce checkout flow. To start with a simple use-case, the logical flow we will consider is:</p>
+<ol>
+<li>When an order is placed, we create a record in a database in the <code>orders</code> service.</li>
+<li>We then reserve inventory (and ensure that the item is in stock) in the <code>inventory</code> service.</li>
+<li>We charge the customer using the <code>payments</code> service.</li>
+<li>Next, we ship the item using the <code>shipping</code> service.</li>
+<li>Finally, the <code>notifications</code> service notifies the customer that the parcel is on its way.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Simple e-commerce workflow" src="https://littlehorse.dev/assets/images/2024-08-27-simple-checkout-301d7115bb5b77f34c84342998c2921d.png" width="1472" height="141" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="microservices-are-distributed">Microservices are Distributed<a href="https://littlehorse.dev/blog/challenge-of-microservices#microservices-are-distributed" class="hash-link" aria-label="Direct link to Microservices are Distributed" title="Direct link to Microservices are Distributed">​</a></h3>
+<p>Recall that each service (in the workflow diagram above, each box) is its own deployable artifact. That means that the happy-path business process described above will involve five different software systems from start-to-finish.</p>
+<p>In the above workflow diagram, each arrow can be accurately interpreted in two ways:</p>
+<ol>
+<li>The logical flow of the business process.</li>
+<li>The physical flow of information between microservices, either through network RPC calls or through a message broker like Apache Kafka.</li>
+</ol>
+<p>Guess what! This means we have a distributed system by definition. As Splunk <a href="https://www.splunk.com/en_us/blog/learn/distributed-systems.html" target="_blank" rel="noopener noreferrer">writes in a blog post</a>:</p>
+<blockquote>
+<p>A distributed system is simply any environment where multiple computers or devices are working on a variety of tasks and components, all spread across a network.</p>
+</blockquote>
+<p>You need to look no further than the <a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing" target="_blank" rel="noopener noreferrer">Fallacies of Distributed Computing</a> (written by Sun Microsystems Fellow L. Peter Deutsch in 1994) to see that this means that microservices are no easy task.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="microservices-are-leaderless">Microservices are Leaderless<a href="https://littlehorse.dev/blog/challenge-of-microservices#microservices-are-leaderless" class="hash-link" aria-label="Direct link to Microservices are Leaderless" title="Direct link to Microservices are Leaderless">​</a></h3>
+<p>As we've seen already, any microservice-based application is a distributed system. Some distributed systems have the concept of a <em>leader</em>, which is a special node in the system that has special responsibilities.</p>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Apache Kafka is my favorite distributed system. In Apache Kafka, the <em>Controller</em> is a special Kafka server that is responsible for deciding which partition replicas are hosted on (and led by) which brokers. If the broker who was in charge of a partition goes down, then the Controller chooses a new broker from the ISR to take its place.</p><p>Therefore, the <em>Controller</em> in Apache Kafka can be thought of as a <em>leader</em>.</p></div></div>
+<p>While systems like Apache Kafka have clear leaders (for example, the <em>Controller</em> may re-assign partition leadership if the cluster becomes too imbalanced), in a microservice-based system there is no central leader to ensure that the chips fall correctly. This is by necessity, because the separation of development concerns and lifecycles across microservices means that microservices cannot and do not have leaders.</p>
+<p>You can think of our e-commerce microservice flow as a line of dominoes falling. Once the process starts, no one entity is responsible for ensuring its completion. The business workflow moves from <code>orders</code> to <code>inventory</code> to <code>payments</code> and so on. If <code>payments</code> fails for some reason (perhaps a network outage makes the Stripe API unavailable), then it's quite possible that the <code>shipping</code> service never finds out about the workflow.</p>
+<p>However, in real life such outcomes are not acceptable. This means that every single player in the system must:</p>
+<ol>
+<li>Have built-in reliability mechanisms.</li>
+<li>Understand the preceding and subsequent steps of the business process to route traffic.</li>
+</ol>
+<p>Implementing the above slows down development, more tightly couples one services to another, increases dependencies, and makes your microservice architecture much more heavyweight.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="the-challenges">The Challenges<a href="https://littlehorse.dev/blog/challenge-of-microservices#the-challenges" class="hash-link" aria-label="Direct link to The Challenges" title="Direct link to The Challenges">​</a></h2>
+<p>So far, we have established that there are many players involved in a business process, yet there's no one orchestrator involved in ensuring that an ordered item is delievered to the the correct address. This yields three problems:</p>
+<ol>
+<li><strong>Reliability</strong> in the face of infrastructure failures.</li>
+<li><strong>Observability</strong> to enable system optimization and debugging.</li>
+<li><strong>Coupling</strong> of microservices to each other makes it hard to modify the system in response to new business requirements.</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="reliability-and-correctness">Reliability and Correctness<a href="https://littlehorse.dev/blog/challenge-of-microservices#reliability-and-correctness" class="hash-link" aria-label="Direct link to Reliability and Correctness" title="Direct link to Reliability and Correctness">​</a></h3>
+<p>Processing orders is a mission-critical use-case. This means that orders should always complete and never be dropped (for example, we should not charge the customer's credit card and not ship the product to them).</p>
+<p>However, asynchronous processing such as that which I outlined above is prone to failures. For example, if you chain microservices together with direct RPC calls, a single network partition can cause an order to get stuck. Even with a reliable message broker such as Apache Kafka or AWS SQS sitting between your microservices, a write to the message broker could fail <em>after</em> the payment went through, still resulting in a stuck order.</p>
+<p>Just as communication <em>between</em> microservices can fail, the actions performed _by_each microservice can also fail. In many cases actions performed by a microservice depend upon failure-prone external systems and API's. If the Stripe API is down, or if the credit card is invalid, we can't just stop processing the order there! We must notify the customer of what went wrong and also release the inventory that we reserved.</p>
+<p>This means that microservice developers spend countless hours building out infrastructure to support:</p>
+<ul>
+<li>Retries</li>
+<li>Dead-Letter Queues</li>
+<li>Rate-limiting</li>
+<li>Timeouts</li>
+<li>Transactional Outbox pattern</li>
+<li>SAGA Pattern</li>
+</ul>
+<p>Back to the domino analogy, if one domino misses the next, the entire chain just stops.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="observability">Observability<a href="https://littlehorse.dev/blog/challenge-of-microservices#observability" class="hash-link" aria-label="Direct link to Observability" title="Direct link to Observability">​</a></h3>
+<p>The second problem with microservices is that once a process instance has started (i.e. the dominoes are falling), it is very difficult to observe what happens between steps 2 through 10. This means that multi-step processes with performance issues are hard to optimize, as there are many microservices which could be the bottleneck and it's hard to know which. Even worse, when a customer complains about a "stuck order," it is difficult to find the point of failure.</p>
+<p>As a result, microservice engineers spend time and money:</p>
+<ul>
+<li>Slogging through logs on DataDog</li>
+<li>Implementing complex distributed tracing such as Zipkin, Jaeger, or Kiali</li>
+<li>Saving the state of each process instance (in our case, the <code>order</code>) in a DB just for visibility purposes at every step</li>
+<li>Coordinating with other teams to manually understand and debug workflows.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="microservice-coupling">Microservice Coupling<a href="https://littlehorse.dev/blog/challenge-of-microservices#microservice-coupling" class="hash-link" aria-label="Direct link to Microservice Coupling" title="Direct link to Microservice Coupling">​</a></h3>
+<p>Lastly, because microservices are leaderless, each player in the end-to-end process must have hard-coded integrations with the preceding and subsequent steps. This results in:</p>
+<ul>
+<li><strong>Process coupling</strong>, wherein changing a business process results in significant code updates to rewire the message queues or RPC calls between two steps.</li>
+<li><strong>Schema coupling</strong>, wherein different microservices have strong dependencies on each others' schemas.</li>
+</ul>
+<p>Microservices come with the promise of loose coupling; however, the unfortunate reality is that this is often not the case. As a result, teams often do have to coordinate with each other during deployments.</p>
+<p>To see an example of the complexity introduced by coupling of microservices, let's consider what happens to our e-commerce checkout workflow when we add a few edge cases to make it more realistic:</p>
+<ol>
+<li>If the credit card is invalid, we request the customer to provide a new one, wait for two days, and either complete or cancel the order.</li>
+<li>If the item is out of stock, we notify the customer who elects either to wait or cancel the order.</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Complex Checkout Architecture" src="https://littlehorse.dev/assets/images/2024-08-27-complex-checkout-915172cb1dfafc0a3e9a7cc0b042ac3a.png" width="1472" height="406" class="img_ev3q"></p>
+<p>In the above diagram, each arrow represents the flow of the business process <em>and</em> information. Each microservice must have custom logic which sends information to the right place. In essence, while we <em>intended</em> to have modular microservices that understand only their own Bounded Context, what we have is tightly-coupled systems which must understand pretty much the entire business workflow.</p>
+<p>Therefore, when business requirements change, unrelated microservices end up having to change their internal implementation as well.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="looking-forward">Looking Forward<a href="https://littlehorse.dev/blog/challenge-of-microservices#looking-forward" class="hash-link" aria-label="Direct link to Looking Forward" title="Direct link to Looking Forward">​</a></h2>
+<p>Microservices have clear and proven benefits, and are often not just advantageous but <em>necessary</em> in some cases. However, as we discussed today, those benefits do not come without a cost. Because microservices are inherently distributed systems, challenges such as reliability, observability, and coordination are exacerbated.</p>
+<p>Without spoiling the punchline of the next blog post, these challenges are why I started LittleHorse almost three years ago. Stay tuned for a description of how a <em>workflow orchestrator</em> can alleviate a good portion of the headaches that come along with microservices.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="business-analytics">Business Analytics<a href="https://littlehorse.dev/blog/challenge-of-microservices#business-analytics" class="hash-link" aria-label="Direct link to Business Analytics" title="Direct link to Business Analytics">​</a></h3>
+<p>Astute readers may notice that when discussing the e-commerce checkout example, we didn't discuss the problem of <em>analytics.</em> We focused exclusively on online transaction processing, or ensuring that the orders are properly fulfilled and processed. However, no attention was paid to business analytics to optimize future sales!</p>
+<p>This area is yet another challenge. The LittleHorse Council is working on a major feature (an output Kafka Topic with records for anytime something <em>interesting</em> happens inside a <code>WfRun</code>) for the LH Server that will address this. Don't worry, we'll blog about it soon <!-- -->😉<!-- -->.</p>]]></content:encoded>
+            <category>Technical Analysis</category>
+        </item>
         <item>
             <title><![CDATA[The Promise of Microservices]]></title>
             <link>https://littlehorse.dev/blog/promise-of-microservices</link>
             <guid>https://littlehorse.dev/blog/promise-of-microservices</guid>
             <pubDate>Thu, 22 Aug 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[<!-- ---]]></description>
+            <description><![CDATA[If microservices add so much complexity, why bother with the hassle?]]></description>
             <content:encoded><![CDATA[<p>If microservices add so much complexity, why bother with the hassle? </p>
-<p>We've all <em>heard of</em> microservices, but unless you've read copious amounts of Sam Newman and Adam Bellemare's writings, you might be wondering whether, when, and why you should adopt them. In this blog post, we will examine the halcyon land promised by microservices.</p>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>This is the first part of a 3-part blog series:</p><ol>
 <li><strong>[This Post]</strong> The Promise of Microservices</li>
-<li><strong>[Coming Soon]</strong> The Challenge with Microservices</li>
+<li><a href="https://littlehorse.dev/blog/challenge-of-microservices">The Challenge with Microservices</a></li>
 <li><strong>[Coming Soon]</strong> Workflow and Microservices: A Match Made in Heaven</li>
 </ol></div></div>
+<p>We've all <em>heard of</em> microservices, but unless you've read copious amounts of Sam Newman and Adam Bellemare's writings, you might be wondering whether, when, and why you should adopt them. In this blog post, we will examine the halcyon land promised by microservices.</p>
 <p>Microservices have been <a href="https://www.simform.com/blog/microservices-examples/" target="_blank" rel="noopener noreferrer">deployed widely</a> across many large enterprises, most notably Netflix, Uber, Shopify, PayPal, and others. As we will discover throughout this blog series, a microservice architecture is mandatory once you reach a certain size of company, and it's probably overkill for a 12-person startup. The gray area inbetween is the interesting part!</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="what-are-microservices">What are Microservices?<a href="https://littlehorse.dev/blog/promise-of-microservices#what-are-microservices" class="hash-link" aria-label="Direct link to What are Microservices?" title="Direct link to What are Microservices?">​</a></h2>
 <p>The term "microservices" refers to a software architecture wherein an enterprise application comprises a collection of small, loosely coupled, and independently deployable services (these small services are called "microservices" in contrast to larger monoliths). Each microservice focuses on a specific business capability and communicates with other services over a network, typically through API's, streaming platforms, or message queues.</p>
@@ -74,9 +191,45 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://littlehorse.dev/blog/promise-of-microservices#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
 <p>The microservice architecture is not just a Twitter-driven buzzword but rather a way of designing system that has several real advantages. For most organizations with over two dozen software engineers, building applications with microservices is not an option but rather a <em>necessity</em>. However, those advantages come with a cost.</p>
 <p>We will discuss those challenges in next week's blog post...in the meantime, though, join our <a href="https://launchpass.com/littlehorsecommunity" target="_blank" rel="noopener noreferrer">Community Slack</a> to get the latest updates!</p>]]></content:encoded>
-            <category>tech-trends</category>
-            <category>microservices</category>
-            <category>littlehorse</category>
+            <category>Technical Analysis</category>
+        </item>
+        <item>
+            <title><![CDATA[Releasing 0.10]]></title>
+            <link>https://littlehorse.dev/blog/littlehorse-0.10-release</link>
+            <guid>https://littlehorse.dev/blog/littlehorse-0.10-release</guid>
+            <pubDate>Fri, 12 Jul 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[TBD]]></description>
+            <content:encoded><![CDATA[<p>The <code>0.10</code> release brings with it significant performance and reliability improvements. </p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features">New Features<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#new-features" class="hash-link" aria-label="Direct link to New Features" title="Direct link to New Features">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lhctl-binaries-and-release-notes"><code>lhctl</code> Binaries and Release Notes<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#lhctl-binaries-and-release-notes" class="hash-link" aria-label="Direct link to lhctl-binaries-and-release-notes" title="Direct link to lhctl-binaries-and-release-notes">​</a></h3>
+<p>The <code>0.10.0</code> release comes with a new <a href="https://github.com/littlehorse-enterprises/littlehorse/releases" target="_blank" rel="noopener noreferrer">Release Page</a>, including <code>lhctl</code> binaries built for ARM, Intel, and Windows.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="reliability-during-rebalances">Reliability during Rebalances<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#reliability-during-rebalances" class="hash-link" aria-label="Direct link to Reliability during Rebalances" title="Direct link to Reliability during Rebalances">​</a></h3>
+<p>PR <a href="https://github.com/littlehorse-enterprises/littlehorse/pull/872" target="_blank" rel="noopener noreferrer">#872</a> improves the reliability of LittleHorse during Kafka Streams rebalances. Previously, if a write request (eg. <code>rpc RunWf</code>) was received just before a rebalance, certain requests would "time out" from the client perspective and return a <code>DEADLINE_EXCEEDED</code> grpc error despite being properly accepted and processed by the server. This PR fixes that issue by redirecting the internal <code>rpc WaitForCommand</code> to the new destination for that command.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rescue-failed-workflows">Rescue Failed Workflows<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#rescue-failed-workflows" class="hash-link" aria-label="Direct link to Rescue Failed Workflows" title="Direct link to Rescue Failed Workflows">​</a></h3>
+<p>PR <a href="https://github.com/littlehorse-enterprises/littlehorse/pull/883" target="_blank" rel="noopener noreferrer">#883</a> allows users to restart failed <code>WfRun</code>'s via the <code>lhctl rescue</code> command. This is similar to allowing a user to execute mutating SQL queries via a CLI like <code>psql</code>.</p>
+<p>With this feature, a user can fix a buggy Task Worker implementation and then restart a failed <code>WfRun</code> and get it to execute the failed <code>TaskRun</code> again via:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">lhctl rescue &lt;wfRunId&gt; &lt;threadRunNumber&gt;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="mtls-principals">mTLS Principals<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#mtls-principals" class="hash-link" aria-label="Direct link to mTLS Principals" title="Direct link to mTLS Principals">​</a></h3>
+<p>Previously, only listeners of the type <code>OAUTH</code> supported <code>Principal</code>s. The <code>Principal</code> ID was determined by the OAuth Client ID or User Id. Release <code>0.10</code> introduces the ability to infer a <code>Principal</code> on an <code>MTLS</code> listener, where the <code>Principal</code> ID comes from the Common Name on the client certificate.</p>
+<p>PR <a href="https://github.com/littlehorse-enterprises/littlehorse/pull/874" target="_blank" rel="noopener noreferrer">#874</a> by one of our newer team members, <a href="https://github.com/snarr" target="_blank" rel="noopener noreferrer">Jacob Snarr</a>, introduced this feature, enabling users that standardize on SSL authentication to continue using that pattern with Littlehorse.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="dashboard-enhancements">Dashboard Enhancements<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#dashboard-enhancements" class="hash-link" aria-label="Direct link to Dashboard Enhancements" title="Direct link to Dashboard Enhancements">​</a></h3>
+<p>The <code>0.10</code> release includes multiple enhancements to the Admin Dashboard, including:</p>
+<ul>
+<li>Ability to search for <code>WfRun</code>'s by their variables.</li>
+<li>Improved <code>WfRun</code> search.</li>
+<li>Fixed display of <code>TaskRun</code>s with the <code>EXCEPTION</code> and <code>ERROR</code> status.</li>
+<li>Showing <code>VariableMutation</code>s on the <code>Edge</code> in the dashboard.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-next">What's Next?<a href="https://littlehorse.dev/blog/littlehorse-0.10-release#whats-next" class="hash-link" aria-label="Direct link to What's Next?" title="Direct link to What's Next?">​</a></h2>
+<p>We will need one more minor release before finally releasing <code>1.0</code>. We need the following:</p>
+<ul>
+<li>Upgrade <code>org.apache.kafka:kafka-streams</code> to <code>3.8.0</code> to address several critical reliability bugs (we are waiting for the official release).</li>
+<li>Conduct new load tests and soak tests against the new version of Kafka Streams.</li>
+<li>Review our Go and Python SDK's in-depth to ensure proper semantics.</li>
+</ul>
+<p>After that, we will be ready to commit to the backwards compatibility guarantees required by <a href="https://semver.org/" target="_blank" rel="noopener noreferrer">Semantic Versioning</a>. We will also release a blog post with our planned release schedule and support schedule.</p>]]></content:encoded>
+            <category>LittleHorse Orchestrator</category>
+            <category>LittleHorse Releases</category>
         </item>
         <item>
             <title><![CDATA[Releasing 0.9]]></title>
@@ -116,8 +269,8 @@
 <li>We have had language experts review each of our three main SDK's (Java, Go, Python) and we have addressed any change requests.</li>
 <li>We approach a year without any breaking changes to our wire protocol.</li>
 </ul>]]></content:encoded>
-            <category>littlehorse</category>
-            <category>release</category>
+            <category>LittleHorse Orchestrator</category>
+            <category>LittleHorse Releases</category>
         </item>
         <item>
             <title><![CDATA[Releasing 0.8]]></title>
@@ -195,8 +348,8 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="looking-forward">Looking Forward<a href="https://littlehorse.dev/blog/littlehorse-0.8-release#looking-forward" class="hash-link" aria-label="Direct link to Looking Forward" title="Direct link to Looking Forward">​</a></h2>
 <p>We continue to stabilize our API and add features that cover edge cases. Load testing, chaos testing, and soak testing are an ongoing project, and we are working with the Apache Kafka Community on a few bugfixes in the Kafka Streams library which is heavily used in the core of LittleHorse.</p>
 <p>Once those action items are resolved, we will make a <code>1.0</code> release candidate. However, in the meantime we don't expect any massively-breaking API changes at the protocol level. However, certain syntactical changes may occur in our SDK's (especially Go and Python).</p>]]></content:encoded>
-            <category>littlehorse</category>
-            <category>release</category>
+            <category>LittleHorse Orchestrator</category>
+            <category>LittleHorse Releases</category>
         </item>
         <item>
             <title><![CDATA[Releasing 0.7]]></title>
@@ -245,8 +398,8 @@
 <p>We will also likely have three minor releases per year, with 12 months of patch support for each minor release. This release schedule is copied from Apache Kafka.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="lh-cloud">LH Cloud<a href="https://littlehorse.dev/blog/littlehorse-0.7-release#lh-cloud" class="hash-link" aria-label="Direct link to LH Cloud" title="Direct link to LH Cloud">​</a></h3>
 <p>Lastly, stay tuned for LittleHorse Cloud! Early access is open. If you would like to sign up for early access to LH Cloud, visit <a href="https://www.littlehorse.io/lh-cloud" target="_blank" rel="noopener noreferrer">our website</a> or contact <code>sales@littlehorse.io</code>.</p>]]></content:encoded>
-            <category>littlehorse</category>
-            <category>release</category>
+            <category>LittleHorse Orchestrator</category>
+            <category>LittleHorse Releases</category>
         </item>
         <item>
             <title><![CDATA[Releasing 0.5.0]]></title>
@@ -328,8 +481,8 @@
 <li><code>EXPERIMENTAL</code>: Try it out and give us feedback! But you might want to wait a release or two before putting it into production.</li>
 </ul>
 <p>The <code>0.6.0</code> release notes will include a table of all of our features and their API Stability Level in all four of our SDK's.</p>]]></content:encoded>
-            <category>littlehorse</category>
-            <category>release</category>
+            <category>LittleHorse Orchestrator</category>
+            <category>LittleHorse Releases</category>
         </item>
         <item>
             <title><![CDATA[Helm and Kubernetes Operators]]></title>
@@ -389,8 +542,7 @@
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="littlehorse-platform">LittleHorse Platform<a href="https://littlehorse.dev/blog/helm-and-k8s-operators#littlehorse-platform" class="hash-link" aria-label="Direct link to LittleHorse Platform" title="Direct link to LittleHorse Platform">​</a></h3>
 <p>LittleHorse Platform is an enterprise-ready distribution of LittleHorse that runs in your own Kubernetes environment. We believe that Helm is fantastic for deploying many stateless applications, and even some stateful applications. However, Helm wouldn't let us go far enough towards providing our customers with a fully self-driving LittleHorse experience. As such, we chose to put in the extra work and build a full Kubernetes Operator. Stay tuned for an extensive list of current and upcoming LH Platform features, all powered by the <a href="https://javaoperatorsdk.io/" target="_blank" rel="noopener noreferrer">Java Operator SDK</a>.</p>
 <p>To inquire about LittleHorse Platform, contact <code>sales@littlehorse.io</code>. To get started with LittleHorse Community (free for production use under the SSPL), check out our <a href="https://littlehorse.dev/docs/developer-guide/install" target="_blank" rel="noopener noreferrer">Installation Docs</a>.</p>]]></content:encoded>
-            <category>friday-tech-tips</category>
-            <category>kubernetes</category>
+            <category>Technical Analysis</category>
         </item>
         <item>
             <title><![CDATA[Releasing 0.2.0]]></title>
@@ -465,8 +617,8 @@ functionality, allowing various strategies for handling failures of individual c
 </ul>
 <p>For an enterprise-ready distribution of LittleHorse running in your own datacenter, contact <code>sales@littlehorse.io</code> to inquire about LittleHorse Platform.</p>
 <p>For a pay-as-you-go, serverless Managed Service of LittleHorse in the cloud, fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLScXVvTYy4LQnYoFoRKRQ7ppuxe0KgncsDukvm96qKN0pU5TnQ/viewform" target="_blank" rel="noopener noreferrer">LH Cloud Waitlist Form</a>.</p>]]></content:encoded>
-            <category>littlehorse</category>
-            <category>release</category>
+            <category>LittleHorse Orchestrator</category>
+            <category>LittleHorse Releases</category>
         </item>
     </channel>
 </rss>

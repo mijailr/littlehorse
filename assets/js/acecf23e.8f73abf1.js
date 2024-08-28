@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklh_site=self.webpackChunklh_site||[]).push([[1903],{1912:s=>{s.exports=JSON.parse('{"blogBasePath":"/blog","blogTitle":"LittleHorse OSS Blog","authorsListPath":"/blog/authors"}')}}]);
